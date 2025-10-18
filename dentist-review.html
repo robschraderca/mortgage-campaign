@@ -482,6 +482,16 @@
             color: white;
         }
         
+        .btn-unapprove {
+            background: linear-gradient(135deg, #718096 0%, #4a5568 100%);
+            color: white;
+        }
+        
+        .btn-unapprove:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(113, 128, 150, 0.4);
+        }
+        
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 1.8em;
@@ -983,6 +993,7 @@ That's the fundamental difference.</textarea>
             <div class="approval-buttons">
                 <button class="btn-approve" onclick="approveCampaign()">✓ Approve Campaign</button>
                 <button class="btn-deny" onclick="denyCampaign()">✗ Deny Campaign</button>
+                <button class="btn-unapprove" onclick="unapprovedCampaign()">↺ Unapprove Campaign</button>
             </div>
         </div>
     </div>
@@ -1215,6 +1226,14 @@ That's the fundamental difference.</textarea>
             }
         }
 
+        function unapprovedCampaign() {
+            if (confirm('Are you sure you want to UNAPPROVE the Dentist campaign? This will reset it to pending status.')) {
+                localStorage.removeItem(`campaign-${campaignName}`);
+                loadDecision();
+                alert('↺ Dentist campaign has been reset to PENDING status.');
+            }
+        }
+        
         function logout() {
             if (confirm('Are you sure you want to logout?')) {
                 sessionStorage.removeItem('campaignAccess');
