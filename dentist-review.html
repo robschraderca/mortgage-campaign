@@ -554,6 +554,58 @@
             box-shadow: 0 8px 20px rgba(113, 128, 150, 0.3);
         }
 
+        .btn-approve-email, .btn-deny-email {
+            padding: 10px 24px;
+            border: 2px solid;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        
+        .btn-approve-email {
+            background: white;
+            color: #38a169;
+            border-color: #38a169;
+        }
+        
+        .btn-approve-email:hover {
+            background: #38a169;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 161, 105, 0.3);
+        }
+        
+        .btn-approve-email.approved {
+            background: #38a169;
+            color: white;
+        }
+        
+        .btn-deny-email {
+            background: white;
+            color: #e53e3e;
+            border-color: #e53e3e;
+        }
+        
+        .btn-deny-email:hover {
+            background: #e53e3e;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(229, 62, 62, 0.3);
+        }
+        
+        .btn-deny-email.denied {
+            background: #e53e3e;
+            color: white;
+        }
+        
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 1.8em;
@@ -702,6 +754,8 @@ NMLS #1036304</div>
                     <button class="btn btn-save" onclick="saveEmail(1)" style="display:none;">💾 Save Changes</button>
                     <button class="btn btn-undo" onclick="undoEmail(1)" style="display:none;">↩️ Restore Original</button>
                     <button class="btn btn-cancel" onclick="cancelEdit(1)" style="display:none;">✖️ Cancel</button>
+                    <button class="btn-approve-email" id="approve-email-1" onclick="approveEmail(1)">✓ Approve</button>
+                    <button class="btn-deny-email" id="deny-email-1" onclick="denyEmail(1)">✗ Deny</button>
                 </div>
             </div>
         </div>
@@ -793,6 +847,8 @@ No expense scrutiny. Ever.</textarea>
                     <button class="btn btn-save" onclick="saveEmail(2)" style="display:none;">💾 Save Changes</button>
                     <button class="btn btn-undo" onclick="undoEmail(2)" style="display:none;">↩️ Restore Original</button>
                     <button class="btn btn-cancel" onclick="cancelEdit(2)" style="display:none;">✖️ Cancel</button>
+                    <button class="btn-approve-email" id="approve-email-2" onclick="approveEmail(2)">✓ Approve</button>
+                    <button class="btn-deny-email" id="deny-email-2" onclick="denyEmail(2)">✗ Deny</button>
                 </div>
             </div>
         </div>
@@ -882,6 +938,8 @@ Just reply with your phone number. I'll call you today.
                     <button class="btn btn-save" onclick="saveEmail(3)" style="display:none;">💾 Save Changes</button>
                     <button class="btn btn-undo" onclick="undoEmail(3)" style="display:none;">↩️ Restore Original</button>
                     <button class="btn btn-cancel" onclick="cancelEdit(3)" style="display:none;">✖️ Cancel</button>
+                    <button class="btn-approve-email" id="approve-email-3" onclick="approveEmail(3)">✓ Approve</button>
+                    <button class="btn-deny-email" id="deny-email-3" onclick="denyEmail(3)">✗ Deny</button>
                 </div>
             </div>
         </div>
@@ -963,6 +1021,8 @@ Already helped 47 dentists get mortgages this year without explaining a single w
                     <button class="btn btn-save" onclick="saveEmail(4)" style="display:none;">💾 Save Changes</button>
                     <button class="btn btn-undo" onclick="undoEmail(4)" style="display:none;">↩️ Restore Original</button>
                     <button class="btn btn-cancel" onclick="cancelEdit(4)" style="display:none;">✖️ Cancel</button>
+                    <button class="btn-approve-email" id="approve-email-4" onclick="approveEmail(4)">✓ Approve</button>
+                    <button class="btn-deny-email" id="deny-email-4" onclick="denyEmail(4)">✗ Deny</button>
                 </div>
             </div>
         </div>
@@ -1050,6 +1110,8 @@ That's the fundamental difference.</textarea>
                     <button class="btn btn-save" onclick="saveEmail(5)" style="display:none;">💾 Save Changes</button>
                     <button class="btn btn-undo" onclick="undoEmail(5)" style="display:none;">↩️ Restore Original</button>
                     <button class="btn btn-cancel" onclick="cancelEdit(5)" style="display:none;">✖️ Cancel</button>
+                    <button class="btn-approve-email" id="approve-email-5" onclick="approveEmail(5)">✓ Approve</button>
+                    <button class="btn-deny-email" id="deny-email-5" onclick="denyEmail(5)">✗ Deny</button>
                 </div>
             </div>
         </div>
@@ -1095,6 +1157,7 @@ That's the fundamental difference.</textarea>
             
             loadSavedContent();
             loadDecision();
+            loadEmailDecisions();
         }
 
         function editEmail(num) {
@@ -1307,6 +1370,55 @@ That's the fundamental difference.</textarea>
                 const statusDiv = document.getElementById('decision-status');
                 statusDiv.innerHTML = ''; // Clear the status badge
                 alert('↺ Dentist campaign has been reset to PENDING status.');
+            }
+        }
+        
+        function approveEmail(num) {
+            const approveBtn = document.getElementById(`approve-email-${num}`);
+            const denyBtn = document.getElementById(`deny-email-${num}`);
+            
+            // Toggle approved state
+            if (approveBtn.classList.contains('approved')) {
+                // Unapprove
+                approveBtn.classList.remove('approved');
+                localStorage.removeItem(`email-${campaignName}-${num}`);
+            } else {
+                // Approve
+                approveBtn.classList.add('approved');
+                denyBtn.classList.remove('denied');
+                localStorage.setItem(`email-${campaignName}-${num}`, 'approved');
+            }
+        }
+        
+        function denyEmail(num) {
+            const approveBtn = document.getElementById(`approve-email-${num}`);
+            const denyBtn = document.getElementById(`deny-email-${num}`);
+            
+            // Toggle denied state
+            if (denyBtn.classList.contains('denied')) {
+                // Undeny
+                denyBtn.classList.remove('denied');
+                localStorage.removeItem(`email-${campaignName}-${num}`);
+            } else {
+                // Deny
+                denyBtn.classList.add('denied');
+                approveBtn.classList.remove('approved');
+                localStorage.setItem(`email-${campaignName}-${num}`, 'denied');
+            }
+        }
+        
+        function loadEmailDecisions() {
+            // Load individual email approval/denial states
+            for (let i = 1; i <= 5; i++) {
+                const decision = localStorage.getItem(`email-${campaignName}-${i}`);
+                const approveBtn = document.getElementById(`approve-email-${i}`);
+                const denyBtn = document.getElementById(`deny-email-${i}`);
+                
+                if (decision === 'approved' && approveBtn) {
+                    approveBtn.classList.add('approved');
+                } else if (decision === 'denied' && denyBtn) {
+                    denyBtn.classList.add('denied');
+                }
             }
         }
         
