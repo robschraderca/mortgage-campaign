@@ -178,14 +178,26 @@
             margin-bottom: 25px;
         }
         
-        .subject-label {
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .subject-label, .body-label {
             color: #667eea;
             font-size: 0.85em;
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 600;
-            margin-bottom: 10px;
-            display: block;
+        }
+        
+        .edit-label {
+            color: #718096;
+            font-size: 0.8em;
+            font-style: italic;
+            font-weight: 400;
         }
         
         .subject-display {
@@ -217,16 +229,6 @@
         
         .body-section {
             margin: 25px 0;
-        }
-        
-        .body-label {
-            color: #667eea;
-            font-size: 0.85em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            display: block;
         }
         
         .email-body-display {
@@ -495,6 +497,12 @@
                 padding: 20px;
             }
             
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            
             .approval-buttons {
                 flex-direction: column;
             }
@@ -549,13 +557,19 @@
             </div>
             <div class="email-content">
                 <div class="subject-section">
-                    <span class="subject-label">Subject Line</span>
+                    <div class="section-header">
+                        <span class="subject-label">Subject Line</span>
+                        <span class="edit-label">← Edit Subject</span>
+                    </div>
                     <div class="subject-display" id="subject-1-display">Dentist denied mortgage despite $400K+ deposits?</div>
                     <input type="text" class="subject-input" id="subject-1-input" style="display:none;" value="Dentist denied mortgage despite $400K+ deposits?">
                 </div>
                 
                 <div class="body-section">
-                    <span class="body-label">Email Body</span>
+                    <div class="section-header">
+                        <span class="body-label">Email Body</span>
+                        <span class="edit-label">← Edit Body Copy</span>
+                    </div>
                     <div class="email-body-display" id="body-1-display">Hi [First Name],
 
 I just helped a dentist close on a $950K home in [City].
@@ -618,10 +632,6 @@ NMLS #1036304</div>
                 </div>
             </div>
         </div>
-
-        <!-- Emails 2-5 would follow the same structure here -->
-        <!-- For brevity, I'm showing the complete structure for Email 1 -->
-        <!-- The deployment script will generate all 5 -->
 
         <div class="approval-section">
             <h3>Campaign Decision</h3>
