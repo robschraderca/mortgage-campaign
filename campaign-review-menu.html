@@ -233,7 +233,8 @@
         </div>
         
         <div class="campaigns-grid">
-            <div class="campaign-card" onclick="window.location.href='dentist-review.html'">
+            <div class="campaign-card" onclick="handleCardClick(event, 'dentist-review.html')">
+                <button class="badge-reset-btn" onclick="resetCampaign(event, 'dentist', 'Dentist')">Reset</button>
                 <div class="status-badge status-pending" id="status-dentist">Pending</div>
                 <div class="campaign-icon">🦷</div>
                 <div class="campaign-title">Dentist Campaign</div>
@@ -250,7 +251,8 @@
                 </div>
             </div>
             
-            <div class="campaign-card" onclick="window.location.href='restaurant-review.html'">
+            <div class="campaign-card" onclick="handleCardClick(event, 'restaurant-review.html')">
+                <button class="badge-reset-btn" onclick="resetCampaign(event, 'restaurant', 'Restaurant')">Reset</button>
                 <div class="status-badge status-pending" id="status-restaurant">Pending</div>
                 <div class="campaign-icon">🍽️</div>
                 <div class="campaign-title">Restaurant Campaign</div>
@@ -267,7 +269,8 @@
                 </div>
             </div>
             
-            <div class="campaign-card" onclick="window.location.href='salon-review.html'">
+            <div class="campaign-card" onclick="handleCardClick(event, 'salon-review.html')">
+                <button class="badge-reset-btn" onclick="resetCampaign(event, 'salon', 'Salon')">Reset</button>
                 <div class="status-badge status-pending" id="status-salon">Pending</div>
                 <div class="campaign-icon">💇</div>
                 <div class="campaign-title">Salon Campaign</div>
