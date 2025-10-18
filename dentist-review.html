@@ -378,60 +378,21 @@
             color: white;
         }
         
-        .approval-section {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            text-align: center;
-            margin-top: 40px;
-        }
         
-        .approval-section h3 {
-            color: #2d3748;
-            font-size: 1.8em;
-            margin-bottom: 30px;
-            font-weight: 700;
-        }
         
-        .approval-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
         
-        .btn-approve, .btn-deny {
-            padding: 18px 50px;
-            font-size: 1.2em;
-            font-weight: 700;
-            border: none;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            min-width: 200px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
         
-        .btn-approve {
-            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
-            color: white;
-        }
         
-        .btn-approve:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(72, 187, 120, 0.4);
-        }
         
-        .btn-deny {
-            background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
-            color: white;
-        }
         
-        .btn-deny:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(245, 101, 101, 0.4);
-        }
+        
+        
+        
+        
+        
+        
+        
+        
         
         .edit-mode {
             background: linear-gradient(135deg, #fffaf0 0%, #fef5e7 100%) !important;
@@ -482,16 +443,102 @@
             color: white;
         }
         
-        .btn-unapprove {
-            background: linear-gradient(135deg, #718096 0%, #4a5568 100%);
+        
+        
+        
+        
+        .approval-section {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            text-align: center;
+            margin-top: 40px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .approval-section h3 {
+            color: #2d3748;
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .approval-section-subtitle {
+            color: #718096;
+            font-size: 1em;
+            margin-bottom: 35px;
+            font-weight: 400;
+        }
+        
+        .approval-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .btn-approve, .btn-deny, .btn-unapprove {
+            padding: 16px 40px;
+            font-size: 1em;
+            font-weight: 600;
+            border: 2px solid;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            min-width: 180px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9em;
+        }
+        
+        .btn-approve {
+            background: white;
+            color: #38a169;
+            border-color: #38a169;
+        }
+        
+        .btn-approve:hover {
+            background: #38a169;
             color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(56, 161, 105, 0.3);
+        }
+        
+        .btn-deny {
+            background: white;
+            color: #e53e3e;
+            border-color: #e53e3e;
+        }
+        
+        .btn-deny:hover {
+            background: #e53e3e;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(229, 62, 62, 0.3);
+        }
+        
+        .btn-unapprove {
+            background: white;
+            color: #718096;
+            border-color: #cbd5e0;
         }
         
         .btn-unapprove:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(113, 128, 150, 0.4);
+            background: #718096;
+            color: white;
+            border-color: #718096;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(113, 128, 150, 0.3);
         }
-        
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 1.8em;
@@ -989,6 +1036,7 @@ That's the fundamental difference.</textarea>
 
         <div class="approval-section">
             <h3>Campaign Decision</h3>
+            <p class="approval-section-subtitle">Review and approve or deny this email campaign</p>
             <div id="decision-status"></div>
             <div class="approval-buttons">
                 <button class="btn-approve" onclick="approveCampaign()">✓ Approve Campaign</button>
