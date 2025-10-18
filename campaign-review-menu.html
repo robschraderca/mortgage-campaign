@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign Review - Select Campaign</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+        
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            background: white;
+            color: #667eea;
+            border: 2px solid white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .logout-btn:hover {
+            background: transparent;
+            color: white;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+        
+        .campaigns-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .campaign-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .campaign-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+        }
+        
+        .campaign-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .campaign-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+        }
+        
+        .campaign-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .campaign-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .campaign-subtitle {
+            color: #718096;
+            font-size: 1em;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .campaign-stats {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+        
+        .stat {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 0.85em;
+            color: #a0aec0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            background: #fbd38d;
+            color: #dd6b20;
+        }
+        
+        .status-approved {
+            background: #9ae6b4;
+            color: #22543d;
+        }
+        
+        .status-denied {
+            background: #fc8181;
+            color: #742a2a;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .campaigns-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .logout-btn {
+                position: static;
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+    
+    <div class="container">
+        <div class="header">
+            <h1>📧 Campaign Review Dashboard</h1>
+            <p>Select a campaign to review and approve</p>
+        </div>
+        
+        <div class="campaigns-grid">
+            <div class="campaign-card" onclick="window.location.href='dentist-review.html'">
+                <div class="status-badge status-pending" id="status-dentist">Pending</div>
+                <div class="campaign-icon">🦷</div>
+                <div class="campaign-title">Dentist Campaign</div>
+                <div class="campaign-subtitle">Bank Statement Mortgage for Self-Employed Dentists</div>
+                <div class="campaign-stats">
+                    <div class="stat">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Emails</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">14-21</div>
+                        <div class="stat-label">Days</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="campaign-card" onclick="window.location.href='restaurant-review.html'">
+                <div class="status-badge status-pending" id="status-restaurant">Pending</div>
+                <div class="campaign-icon">🍽️</div>
+                <div class="campaign-title">Restaurant Campaign</div>
+                <div class="campaign-subtitle">Bank Statement Mortgage for Restaurant Owners</div>
+                <div class="campaign-stats">
+                    <div class="stat">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Emails</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">14-21</div>
+                        <div class="stat-label">Days</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="campaign-card" onclick="window.location.href='salon-review.html'">
+                <div class="status-badge status-pending" id="status-salon">Pending</div>
+                <div class="campaign-icon">💇</div>
+                <div class="campaign-title">Salon Campaign</div>
+                <div class="campaign-subtitle">Bank Statement Mortgage for Salon Owners</div>
+                <div class="campaign-stats">
+                    <div class="stat">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Emails</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">14-21</div>
+                        <div class="stat-label">Days</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Check authentication
+        if (sessionStorage.getItem('campaignAccess') !== 'granted') {
+            window.location.href = 'client-login.html';
+        }
+        
+        // Load campaign statuses
+        function loadStatuses() {
+            const campaigns = ['dentist', 'restaurant', 'salon'];
+            
+            campaigns.forEach(campaign => {
+                const decision = localStorage.getItem(`campaign-${campaign}`);
+                const badge = document.getElementById(`status-${campaign}`);
+                
+                if (decision === 'approved') {
+                    badge.textContent = '✓ Approved';
+                    badge.className = 'status-badge status-approved';
+                } else if (decision === 'denied') {
+                    badge.textContent = '✗ Denied';
+                    badge.className = 'status-badge status-denied';
+                } else {
+                    badge.textContent = 'Pending';
+                    badge.className = 'status-badge status-pending';
+                }
+            });
+        }
+        
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                sessionStorage.removeItem('campaignAccess');
+                window.location.href = 'client-login.html';
+            }
+        }
+        
+        window.addEventListener('DOMContentLoaded', loadStatuses);
+    </script>
+</body>
+</html>
