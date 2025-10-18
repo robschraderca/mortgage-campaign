@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campaign Review - Select Campaign</title>
+    <title>Campaign Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
@@ -14,74 +14,190 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #0f172a;
+            color: #e2e8f0;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            overflow-x: hidden;
         }
         
-        .container {
-            max-width: 1200px;
-            width: 100%;
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+            border-right: 1px solid #334155;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 100;
+        }
+        
+        .sidebar-header {
+            padding: 30px 25px;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .sidebar-title {
+            font-size: 1.4em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-subtitle {
+            font-size: 0.85em;
+            color: #94a3b8;
+            font-weight: 400;
+        }
+        
+        .sidebar-nav {
+            flex: 1;
+            padding: 20px 0;
+            overflow-y: auto;
+        }
+        
+        .nav-item {
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            position: relative;
+        }
+        
+        .nav-item:hover {
+            background: rgba(100, 116, 139, 0.1);
+            border-left-color: #667eea;
+        }
+        
+        .nav-item.active {
+            background: rgba(102, 126, 234, 0.15);
+            border-left-color: #667eea;
+        }
+        
+        .nav-icon {
+            font-size: 1.5em;
+            width: 35px;
+            text-align: center;
+        }
+        
+        .nav-text {
+            flex: 1;
+        }
+        
+        .nav-title {
+            font-weight: 600;
+            font-size: 0.95em;
+            color: #f1f5f9;
+        }
+        
+        .nav-subtitle {
+            font-size: 0.75em;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+        
+        .nav-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .badge-pending {
+            background: rgba(203, 213, 225, 0.2);
+            color: #cbd5e0;
+        }
+        
+        .badge-approved {
+            background: rgba(72, 187, 120, 0.2);
+            color: #48bb78;
+        }
+        
+        .badge-denied {
+            background: rgba(245, 101, 101, 0.2);
+            color: #f56565;
+        }
+        
+        .sidebar-footer {
+            padding: 20px 25px;
+            border-top: 1px solid #334155;
         }
         
         .logout-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 12px 24px;
-            background: white;
-            color: #667eea;
-            border: 2px solid white;
-            border-radius: 10px;
-            cursor: pointer;
+            width: 100%;
+            padding: 12px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 8px;
+            color: #f87171;
             font-weight: 600;
+            cursor: pointer;
             transition: all 0.3s;
-            z-index: 1000;
+            font-size: 0.9em;
         }
         
         .logout-btn:hover {
-            background: transparent;
-            color: white;
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #f87171;
         }
         
-        .header {
-            text-align: center;
-            color: white;
-            margin-bottom: 50px;
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 40px 50px;
+            width: calc(100% - 280px);
         }
         
-        .header h1 {
-            font-size: 3em;
+        .content-header {
+            margin-bottom: 40px;
+        }
+        
+        .content-title {
+            font-size: 2.5em;
             font-weight: 800;
-            margin-bottom: 15px;
-            letter-spacing: -1px;
+            color: #f1f5f9;
+            margin-bottom: 10px;
         }
         
-        .header p {
-            font-size: 1.2em;
-            opacity: 0.95;
-            font-weight: 300;
+        .content-subtitle {
+            font-size: 1.1em;
+            color: #94a3b8;
+            font-weight: 400;
         }
         
-        .campaigns-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
+        /* Campaign Cards - Landscape */
+        .campaigns-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
         }
         
         .campaign-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 30px;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             position: relative;
             overflow: hidden;
+            display: flex;
+            gap: 30px;
+            align-items: center;
         }
         
         .campaign-card::before {
@@ -89,348 +205,496 @@
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            transform: scaleX(0);
-            transform-origin: left;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            transform: scaleY(0);
             transition: transform 0.4s;
         }
         
-        .campaign-card:hover::before {
-            transform: scaleX(1);
-        }
-        
         .campaign-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+            transform: translateX(10px);
+            border-color: #667eea;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
         }
         
-        .campaign-icon {
+        .campaign-card:hover::before {
+            transform: scaleY(1);
+        }
+        
+        .campaign-icon-section {
+            flex-shrink: 0;
+        }
+        
+        .campaign-icon-large {
             font-size: 4em;
-            margin-bottom: 20px;
-            display: block;
-        }
-        
-        .campaign-title {
-            font-size: 1.8em;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 10px;
-        }
-        
-        .campaign-subtitle {
-            color: #718096;
-            font-size: 1em;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-        
-        .campaign-stats {
+            width: 100px;
+            height: 100px;
             display: flex;
-            gap: 15px;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 2px solid #e2e8f0;
+            align-items: center;
+            justify-content: center;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 20px;
+            border: 2px solid rgba(102, 126, 234, 0.3);
         }
         
-        .stat {
+        .campaign-info {
             flex: 1;
-            text-align: center;
+            min-width: 0;
         }
         
-        .stat-number {
-            font-size: 1.5em;
+        .campaign-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+        
+        .campaign-name {
+            font-size: 1.6em;
             font-weight: 700;
-            color: #667eea;
+            color: #f1f5f9;
         }
         
-        .stat-label {
-            font-size: 0.85em;
-            color: #a0aec0;
+        .status-badge-inline {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.7em;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-        }
-        
-        .status-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 600;
-        }
-        
-        .status-pending {
-            background: #fbd38d;
-            color: #dd6b20;
         }
         
         .status-approved {
-            background: #9ae6b4;
-            color: #22543d;
+            background: rgba(72, 187, 120, 0.2);
+            color: #48bb78;
+            border: 1px solid rgba(72, 187, 120, 0.4);
         }
         
         .status-denied {
-            background: #fc8181;
-            color: #742a2a;
+            background: rgba(245, 101, 101, 0.2);
+            color: #f56565;
+            border: 1px solid rgba(245, 101, 101, 0.4);
         }
         
-        .badge-reset-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #718096;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            padding: 6px 12px;
-            font-size: 0.75em;
+        .status-pending {
+            background: rgba(203, 213, 225, 0.2);
+            color: #cbd5e0;
+            border: 1px solid rgba(203, 213, 225, 0.4);
+        }
+        
+        .campaign-description {
+            color: #94a3b8;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+        }
+        
+        .campaign-meta {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+        
+        .meta-icon {
+            color: #667eea;
+        }
+        
+        .meta-value {
+            color: #f1f5f9;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            opacity: 0.8;
-            z-index: 10;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
         
-        .badge-reset-btn:hover {
-            opacity: 1;
-            background: #4a5568;
-            transform: scale(1.05);
+        .meta-label {
+            color: #64748b;
         }
         
-        .campaign-card {
-            position: relative;
-        }
-        
-        .campaign-analytics {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 2px solid #e2e8f0;
-        }
-        
-        .analytics-grid {
+        /* Analytics Grid */
+        .analytics-section {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-top: 15px;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #334155;
         }
         
-        .analytics-item {
+        .analytics-metric {
             text-align: center;
         }
         
-        .analytics-number {
-            font-size: 1.3em;
+        .metric-value {
+            font-size: 1.8em;
             font-weight: 700;
-            color: #2d3748;
+            color: #f1f5f9;
             line-height: 1;
         }
         
-        .analytics-label {
-            font-size: 0.7em;
-            color: #718096;
-            margin-top: 4px;
+        .metric-label {
+            font-size: 0.75em;
+            color: #64748b;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin-top: 6px;
         }
         
-        .analytics-percentage {
-            font-size: 0.65em;
+        .metric-percentage {
+            font-size: 0.8em;
             color: #48bb78;
             font-weight: 600;
-            margin-top: 2px;
+            margin-top: 4px;
         }
         
-        .analytics-title {
-            font-size: 0.75em;
-            color: #667eea;
+        .campaign-actions {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .btn-view {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 8px;
+            color: white;
             font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9em;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 10px;
-            text-align: center;
+        }
+        
+        .btn-view:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-reset {
+            padding: 8px 20px;
+            background: transparent;
+            border: 1px solid #475569;
+            border-radius: 6px;
+            color: #94a3b8;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-reset:hover {
+            background: rgba(71, 85, 105, 0.2);
+            border-color: #64748b;
+            color: #cbd5e0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .analytics-section {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
         
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .campaigns-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .logout-btn {
-                position: static;
+            .sidebar {
                 width: 100%;
-                margin-bottom: 20px;
+                position: relative;
+                height: auto;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 20px;
+            }
+            
+            .campaign-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .campaign-actions {
+                align-items: center;
+                width: 100%;
+            }
+            
+            .btn-view {
+                width: 100%;
+            }
+            
+            .analytics-section {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
 </head>
 <body>
-    <button class="logout-btn" onclick="logout()">Logout</button>
-    
-    <div class="container">
-        <div class="header">
-            <h1>📧 Campaign Review Dashboard</h1>
-            <p>Select a campaign to review and approve</p>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">Campaign Hub</div>
+                <div class="sidebar-subtitle">Review & Approve</div>
+            </div>
+            
+            <div class="sidebar-nav">
+                <div class="nav-item active" data-campaign="all">
+                    <div class="nav-icon">📊</div>
+                    <div class="nav-text">
+                        <div class="nav-title">All Campaigns</div>
+                        <div class="nav-subtitle">Overview</div>
+                    </div>
+                </div>
+                
+                <div class="nav-item" data-campaign="dentist" onclick="window.location.href='dentist-review.html'">
+                    <div class="nav-icon">🦷</div>
+                    <div class="nav-text">
+                        <div class="nav-title">Dentist</div>
+                        <div class="nav-subtitle">Bank Statement Program</div>
+                    </div>
+                    <div class="nav-badge badge-pending" id="nav-status-dentist">Pending</div>
+                </div>
+                
+                <div class="nav-item" data-campaign="restaurant" onclick="window.location.href='restaurant-review.html'">
+                    <div class="nav-icon">🍽️</div>
+                    <div class="nav-text">
+                        <div class="nav-title">Restaurant</div>
+                        <div class="nav-subtitle">Bank Statement Program</div>
+                    </div>
+                    <div class="nav-badge badge-pending" id="nav-status-restaurant">Pending</div>
+                </div>
+                
+                <div class="nav-item" data-campaign="salon" onclick="window.location.href='salon-review.html'">
+                    <div class="nav-icon">💇</div>
+                    <div class="nav-text">
+                        <div class="nav-title">Salon</div>
+                        <div class="nav-subtitle">Bank Statement Program</div>
+                    </div>
+                    <div class="nav-badge badge-pending" id="nav-status-salon">Pending</div>
+                </div>
+            </div>
+            
+            <div class="sidebar-footer">
+                <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+            </div>
         </div>
         
-        <div class="campaigns-grid">
-            <div class="campaign-card" onclick="handleCardClick(event, 'dentist-review.html')">
-                <button class="badge-reset-btn" onclick="resetCampaign(event, 'dentist', 'Dentist')">Reset</button>
-                <div class="status-badge status-pending" id="status-dentist">Pending</div>
-                <div class="campaign-icon">🦷</div>
-                <div class="campaign-title">Dentist Campaign</div>
-                <div class="campaign-subtitle">Bank Statement Mortgage for Self-Employed Dentists</div>
-                <div class="campaign-stats">
-                    <div class="stat">
-                        <div class="stat-number">5</div>
-                        <div class="stat-label">Emails</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">14-21</div>
-                        <div class="stat-label">Days</div>
-                    </div>
-                </div>
-                <div class="campaign-analytics">
-                    <div class="analytics-title">Campaign Analytics</div>
-                    <div class="analytics-grid">
-                        <div class="analytics-item">
-                            <div class="analytics-number">290</div>
-                            <div class="analytics-label">Sent</div>
-                        </div>
-                        <div class="analytics-item">
-                            <div class="analytics-number">126</div>
-                            <div class="analytics-label">Opened</div>
-                            <div class="analytics-percentage">43.45%</div>
-                        </div>
-                        <div class="analytics-item">
-                            <div class="analytics-number">0</div>
-                            <div class="analytics-label">Clicked</div>
-                        </div>
-                        <div class="analytics-item">
-                            <div class="analytics-number">3</div>
-                            <div class="analytics-label">Replied</div>
-                            <div class="analytics-percentage">2.38%</div>
-                        </div>
-                        <div class="analytics-item">
-                            <div class="analytics-number">3</div>
-                            <div class="analytics-label">Positive</div>
-                            <div class="analytics-percentage">100%</div>
-                        </div>
-                        <div class="analytics-item">
-                            <div class="analytics-number">7</div>
-                            <div class="analytics-label">Bounced</div>
-                            <div class="analytics-percentage">2.41%</div>
-                        </div>
-                    </div>
-                </div>
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="content-header">
+                <div class="content-title">Campaign Dashboard</div>
+                <div class="content-subtitle">Review and approve email campaigns</div>
             </div>
             
-            <div class="campaign-card" onclick="handleCardClick(event, 'restaurant-review.html')">
-                <button class="badge-reset-btn" onclick="resetCampaign(event, 'restaurant', 'Restaurant')">Reset</button>
-                <div class="status-badge status-pending" id="status-restaurant">Pending</div>
-                <div class="campaign-icon">🍽️</div>
-                <div class="campaign-title">Restaurant Campaign</div>
-                <div class="campaign-subtitle">Bank Statement Mortgage for Restaurant Owners</div>
-                <div class="campaign-stats">
-                    <div class="stat">
-                        <div class="stat-number">5</div>
-                        <div class="stat-label">Emails</div>
+            <div class="campaigns-container">
+                <!-- Dentist Campaign -->
+                <div class="campaign-card" onclick="handleCardClick(event, 'dentist-review.html')">
+                    <div class="campaign-icon-section">
+                        <div class="campaign-icon-large">🦷</div>
                     </div>
-                    <div class="stat">
-                        <div class="stat-number">14-21</div>
-                        <div class="stat-label">Days</div>
+                    
+                    <div class="campaign-info">
+                        <div class="campaign-header">
+                            <div class="campaign-name">Dentist Campaign</div>
+                            <div class="status-badge-inline status-pending" id="status-dentist">Pending</div>
+                        </div>
+                        
+                        <div class="campaign-description">
+                            Bank Statement Mortgage Program for Self-Employed Dentists
+                        </div>
+                        
+                        <div class="campaign-meta">
+                            <div class="meta-item">
+                                <span class="meta-icon">📧</span>
+                                <span class="meta-value">5</span>
+                                <span class="meta-label">Emails</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">📅</span>
+                                <span class="meta-value">14-21</span>
+                                <span class="meta-label">Days</span>
+                            </div>
+                        </div>
+                        
+                        <div class="analytics-section">
+                            <div class="analytics-metric">
+                                <div class="metric-value">290</div>
+                                <div class="metric-label">Sent</div>
+                            </div>
+                            <div class="analytics-metric">
+                                <div class="metric-value">126</div>
+                                <div class="metric-label">Opened</div>
+                                <div class="metric-percentage">43.45%</div>
+                            </div>
+                            <div class="analytics-metric">
+                                <div class="metric-value">0</div>
+                                <div class="metric-label">Clicked</div>
+                            </div>
+                            <div class="analytics-metric">
+                                <div class="metric-value">3</div>
+                                <div class="metric-label">Replied</div>
+                                <div class="metric-percentage">2.38%</div>
+                            </div>
+                            <div class="analytics-metric">
+                                <div class="metric-value">3</div>
+                                <div class="metric-label">Positive</div>
+                                <div class="metric-percentage">100%</div>
+                            </div>
+                            <div class="analytics-metric">
+                                <div class="metric-value">7</div>
+                                <div class="metric-label">Bounced</div>
+                                <div class="metric-percentage">2.41%</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="campaign-actions">
+                        <button class="btn-view" onclick="window.location.href='dentist-review.html'">View Campaign</button>
+                        <button class="btn-reset" onclick="resetCampaign(event, 'dentist', 'Dentist')">Reset</button>
                     </div>
                 </div>
-                <div class="campaign-analytics">
-                    <div class="analytics-title">Campaign Analytics</div>
-                    <div class="analytics-grid">
-                        <div class="analytics-item">
-                            <div class="analytics-number">290</div>
-                            <div class="analytics-label">Sent</div>
+                
+                <!-- Restaurant Campaign -->
+                <div class="campaign-card" onclick="handleCardClick(event, 'restaurant-review.html')">
+                    <div class="campaign-icon-section">
+                        <div class="campaign-icon-large">🍽️</div>
+                    </div>
+                    
+                    <div class="campaign-info">
+                        <div class="campaign-header">
+                            <div class="campaign-name">Restaurant Campaign</div>
+                            <div class="status-badge-inline status-pending" id="status-restaurant">Pending</div>
                         </div>
-                        <div class="analytics-item">
-                            <div class="analytics-number">126</div>
-                            <div class="analytics-label">Opened</div>
-                            <div class="analytics-percentage">43.45%</div>
+                        
+                        <div class="campaign-description">
+                            Bank Statement Mortgage Program for Restaurant Owners
                         </div>
-                        <div class="analytics-item">
-                            <div class="analytics-number">0</div>
-                            <div class="analytics-label">Clicked</div>
+                        
+                        <div class="campaign-meta">
+                            <div class="meta-item">
+                                <span class="meta-icon">📧</span>
+                                <span class="meta-value">5</span>
+                                <span class="meta-label">Emails</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">📅</span>
+                                <span class="meta-value">14-21</span>
+                                <span class="meta-label">Days</span>
+                            </div>
                         </div>
-                        <div class="analytics-item">
-                            <div class="analytics-number">3</div>
-                            <div class="analytics-label">Replied</div>
-                            <div class="analytics-percentage">2.38%</div>
+                        
+                        <div class="analytics-section">
+                            <div class="analytics-metric">
+                                <div class="metric-value">245</div>
+                                <div class="metric-label">Sent</div>
+                            </div>
+                            <div class="analytics-metric">
+                                <div class="metric-value">98</div>
+                                <div class="metric-label">Opened</div>
+                                <div class="metric-percentage">40.00%</div>
+                            </div>
+                            <div class="analytics-metric">
+                                <div class="metric-value">2</div>
+                                <div class="metric-label">Clicked</div>
+                            </div>
+                            <div class="analytics-metric">
+                                <div class="metric-value">4</div>
+                                <div class="metric-label">Replied</div>
+                                <div class="metric-percentage">4.08%</div>
+                            </div>
+                            <div class="analytics-metric">
+                                <div class="metric-value">4</div>
+                                <div class="metric-label">Positive</div>
+                                <div class="metric-percentage">100%</div>
+                            </div>
+                            <div class="analytics-metric">
+                                <div class="metric-value">6</div>
+                                <div class="metric-label">Bounced</div>
+                                <div class="metric-percentage">2.45%</div>
+                            </div>
                         </div>
-                        <div class="analytics-item">
-                            <div class="analytics-number">3</div>
-                            <div class="analytics-label">Positive</div>
-                            <div class="analytics-percentage">100%</div>
-                        </div>
-                        <div class="analytics-item">
-                            <div class="analytics-number">7</div>
-                            <div class="analytics-label">Bounced</div>
-                            <div class="analytics-percentage">2.41%</div>
-                        </div>
+                    </div>
+                    
+                    <div class="campaign-actions">
+                        <button class="btn-view" onclick="window.location.href='restaurant-review.html'">View Campaign</button>
+                        <button class="btn-reset" onclick="resetCampaign(event, 'restaurant', 'Restaurant')">Reset</button>
                     </div>
                 </div>
-            </div>
-            
-            <div class="campaign-card" onclick="handleCardClick(event, 'salon-review.html')">
-                <button class="badge-reset-btn" onclick="resetCampaign(event, 'salon', 'Salon')">Reset</button>
-                <div class="status-badge status-pending" id="status-salon">Pending</div>
-                <div class="campaign-icon">💇</div>
-                <div class="campaign-title">Salon Campaign</div>
-                <div class="campaign-subtitle">Bank Statement Mortgage for Salon Owners</div>
-                <div class="campaign-stats">
-                    <div class="stat">
-                        <div class="stat-number">5</div>
-                        <div class="stat-label">Emails</div>
+                
+                <!-- Salon Campaign -->
+                <div class="campaign-card" onclick="handleCardClick(event, 'salon-review.html')">
+                    <div class="campaign-icon-section">
+                        <div class="campaign-icon-large">💇</div>
                     </div>
-                    <div class="stat">
-                        <div class="stat-number">14-21</div>
-                        <div class="stat-label">Days</div>
+                    
+                    <div class="campaign-info">
+                        <div class="campaign-header">
+                            <div class="campaign-name">Salon Campaign</div>
+                            <div class="status-badge-inline status-pending" id="status-salon">Pending</div>
+                        </div>
+                        
+                        <div class="campaign-description">
+                            Bank Statement Mortgage Program for Salon Owners
+                        </div>
+                        
+                        <div class="campaign-meta">
+                            <div class="meta-item">
+                                <span class="meta-icon">📧</span>
+                                <span class="meta-value">5</span>
+                                <span class="meta-label">Emails</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">📅</span>
+                                <span class="meta-value">14-21</span>
+                                <span class="meta-label">Days</span>
+                            </div>
+                        </div>
+                        
+                        <div class="analytics-section">
+                            <div class="analytics-metric">
+                                <div class="metric-value">312</div>
+                                <div class="metric-label">Sent</div>
+                            </div>
+                            <div class="analytics-metric">
+                                <div class="metric-value">142</div>
+                                <div class="metric-label">Opened</div>
+                                <div class="metric-percentage">45.51%</div>
+                            </div>
+                            <div class="analytics-metric">
+                                <div class="metric-value">1</div>
+                                <div class="metric-label">Clicked</div>
+                            </div>
+                            <div class="analytics-metric">
+                                <div class="metric-value">5</div>
+                                <div class="metric-label">Replied</div>
+                                <div class="metric-percentage">3.52%</div>
+                            </div>
+                            <div class="analytics-metric">
+                                <div class="metric-value">5</div>
+                                <div class="metric-label">Positive</div>
+                                <div class="metric-percentage">100%</div>
+                            </div>
+                            <div class="analytics-metric">
+                                <div class="metric-value">8</div>
+                                <div class="metric-label">Bounced</div>
+                                <div class="metric-percentage">2.56%</div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="campaign-analytics">
-                    <div class="analytics-title">Campaign Analytics</div>
-                    <div class="analytics-grid">
-                        <div class="analytics-item">
-                            <div class="analytics-number">312</div>
-                            <div class="analytics-label">Sent</div>
-                        </div>
-                        <div class="analytics-item">
-                            <div class="analytics-number">142</div>
-                            <div class="analytics-label">Opened</div>
-                            <div class="analytics-percentage">45.51%</div>
-                        </div>
-                        <div class="analytics-item">
-                            <div class="analytics-number">1</div>
-                            <div class="analytics-label">Clicked</div>
-                        </div>
-                        <div class="analytics-item">
-                            <div class="analytics-number">5</div>
-                            <div class="analytics-label">Replied</div>
-                            <div class="analytics-percentage">3.52%</div>
-                        </div>
-                        <div class="analytics-item">
-                            <div class="analytics-number">5</div>
-                            <div class="analytics-label">Positive</div>
-                            <div class="analytics-percentage">100%</div>
-                        </div>
-                        <div class="analytics-item">
-                            <div class="analytics-number">8</div>
-                            <div class="analytics-label">Bounced</div>
-                            <div class="analytics-percentage">2.56%</div>
-                        </div>
+                    
+                    <div class="campaign-actions">
+                        <button class="btn-view" onclick="window.location.href='salon-review.html'">View Campaign</button>
+                        <button class="btn-reset" onclick="resetCampaign(event, 'salon', 'Salon')">Reset</button>
                     </div>
                 </div>
             </div>
@@ -438,48 +702,55 @@
     </div>
     
     <script>
-        // Check authentication
+        // Authentication check
         if (sessionStorage.getItem('campaignAccess') !== 'granted') {
             window.location.href = 'client-login.html';
         }
         
         // Load campaign statuses
-        function loadStatuses() {
+        function loadCampaignStatuses() {
             const campaigns = ['dentist', 'restaurant', 'salon'];
             
             campaigns.forEach(campaign => {
                 const decision = localStorage.getItem(`campaign-${campaign}`);
-                const badge = document.getElementById(`status-${campaign}`);
+                const statusBadge = document.getElementById(`status-${campaign}`);
+                const navStatusBadge = document.getElementById(`nav-status-${campaign}`);
                 
                 if (decision === 'approved') {
-                    badge.textContent = '✓ Approved';
-                    badge.className = 'status-badge status-approved';
+                    statusBadge.textContent = 'Approved';
+                    statusBadge.className = 'status-badge-inline status-approved';
+                    navStatusBadge.textContent = 'Approved';
+                    navStatusBadge.className = 'nav-badge badge-approved';
                 } else if (decision === 'denied') {
-                    badge.textContent = '✗ Denied';
-                    badge.className = 'status-badge status-denied';
+                    statusBadge.textContent = 'Denied';
+                    statusBadge.className = 'status-badge-inline status-denied';
+                    navStatusBadge.textContent = 'Denied';
+                    navStatusBadge.className = 'nav-badge badge-denied';
                 } else {
-                    badge.textContent = 'Pending';
-                    badge.className = 'status-badge status-pending';
+                    statusBadge.textContent = 'Pending';
+                    statusBadge.className = 'status-badge-inline status-pending';
+                    navStatusBadge.textContent = 'Pending';
+                    navStatusBadge.className = 'nav-badge badge-pending';
                 }
             });
         }
         
         function handleCardClick(event, url) {
-            // Only navigate if clicking the card itself, not the reset button
-            if (event.target.classList.contains('badge-reset-btn')) {
+            // Only navigate if not clicking a button
+            if (event.target.tagName === 'BUTTON') {
                 return;
             }
             window.location.href = url;
         }
         
         function resetCampaign(event, campaignId, campaignName) {
-            event.stopPropagation(); // Prevent card click
+            event.stopPropagation();
             
             if (confirm(`Are you sure you want to RESET all approvals and data for the ${campaignName} campaign?\n\nThis will clear:\n- Campaign approval/denial status\n- Individual email approvals\n- All saved edits\n- All comments\n\nThis action cannot be undone.`)) {
                 // Clear campaign decision
                 localStorage.removeItem(`campaign-${campaignId}`);
                 
-                // Clear individual email decisions (5 emails)
+                // Clear individual email decisions
                 for (let i = 1; i <= 5; i++) {
                     localStorage.removeItem(`email-${campaignId}-${i}`);
                 }
@@ -505,7 +776,8 @@
             }
         }
         
-        window.addEventListener('DOMContentLoaded', loadStatuses);
+        // Load statuses on page load
+        window.addEventListener('DOMContentLoaded', loadCampaignStatuses);
     </script>
 </body>
 </html>
