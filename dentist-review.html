@@ -1392,6 +1392,9 @@ That's the fundamental difference.</textarea>
                 approveBtn.classList.add('approved');
                 denyBtn.classList.remove('denied');
                 localStorage.setItem(`email-${campaignName}-${num}`, 'approved');
+                
+                // Update SmartLead when email is approved
+                updateSmartLeadCampaign(num);
             }
         }
         
@@ -1434,6 +1437,95 @@ That's the fundamental difference.</textarea>
             }
         }
 
+
+        // SmartLead Integration
+        const SMARTLEAD_CAMPAIGN_ID = null; // Set this to your SmartLead campaign ID
+        
+        async function updateSmartLeadCampaign(emailNumber) {
+            if (!SMARTLEAD_CAMPAIGN_ID) {
+                console.log('SmartLead campaign ID not configured');
+                return;
+            }
+            
+            // Check if all 5 emails are now approved
+            const allApproved = checkAllEmailsApproved();
+            
+            if (allApproved) {
+                showSmartLeadNotification('All emails approved! Campaign ready to launch in SmartLead.', 'success');
+                
+                // Uncomment when SmartLead API is ready
+                // try {
+                //     const response = await smartlead_update_campaign_status({
+                //         campaign_id: SMARTLEAD_CAMPAIGN_ID,
+                //         status: 'START'
+                //     });
+                //     showSmartLeadNotification('✓ SmartLead campaign started successfully!', 'success');
+                // } catch (error) {
+                //     showSmartLeadNotification('⚠️ Error starting SmartLead campaign: ' + error.message, 'error');
+                // }
+            } else {
+                const approvedCount = getApprovedEmailCount();
+                showSmartLeadNotification(`Email ${emailNumber} approved (${approvedCount}/5 emails approved)`, 'info');
+            }
+        }
+        
+        function checkAllEmailsApproved() {
+            for (let i = 1; i <= 5; i++) {
+                const decision = localStorage.getItem(`email-${campaignName}-${i}`);
+                if (decision !== 'approved') {
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+        function getApprovedEmailCount() {
+            let count = 0;
+            for (let i = 1; i <= 5; i++) {
+                const decision = localStorage.getItem(`email-${campaignName}-${i}`);
+                if (decision === 'approved') {
+                    count++;
+                }
+            }
+            return count;
+        }
+        
+        function showSmartLeadNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = 'smartlead-notification';
+            
+            const bgColors = {
+                success: 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)',
+                error: 'linear-gradient(135deg, #f56565 0%, #e53e3e 100%)',
+                info: 'linear-gradient(135deg, #4299e1 0%, #3182ce 100%)'
+            };
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 120px;
+                right: 20px;
+                padding: 15px 25px;
+                background: ${bgColors[type]};
+                color: white;
+                border-radius: 10px;
+                font-weight: 600;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                z-index: 10000;
+                animation: slideIn 0.3s ease-out;
+                max-width: 400px;
+            `;
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(400px)';
+                notification.style.transition = 'all 0.3s ease-out';
+                setTimeout(() => notification.remove(), 300);
+            }, 5000);
+        }
+        
         // Initialize on load
         window.addEventListener('DOMContentLoaded', init);
     </script>

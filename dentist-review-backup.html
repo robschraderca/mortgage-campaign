@@ -302,7 +302,6 @@
             resize: vertical;
             background: white;
             transition: all 0.3s;
-            margin-bottom: 12px;
         }
         
         .comments-textarea:focus {
@@ -311,34 +310,20 @@
             box-shadow: 0 0 0 3px rgba(237, 137, 54, 0.1);
         }
         
-        .btn-submit-comment {
-            padding: 10px 24px;
-            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9em;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 2px 8px rgba(237, 137, 54, 0.3);
+        .comments-display {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            white-space: pre-line;
+            line-height: 1.6;
+            color: #2d3748;
+            min-height: 80px;
+            border: 2px solid #fbd38d;
         }
         
-        .btn-submit-comment:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(237, 137, 54, 0.4);
-        }
-        
-        .comments-saved {
-            display: inline-block;
-            margin-left: 10px;
-            color: #38a169;
-            font-size: 0.9em;
-            font-weight: 600;
-            animation: fadeIn 0.3s;
+        .comments-empty {
+            color: #a0aec0;
+            font-style: italic;
         }
         
         .edit-controls {
@@ -393,21 +378,60 @@
             color: white;
         }
         
+        .approval-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            text-align: center;
+            margin-top: 40px;
+        }
         
+        .approval-section h3 {
+            color: #2d3748;
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
         
+        .approval-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
         
+        .btn-approve, .btn-deny {
+            padding: 18px 50px;
+            font-size: 1.2em;
+            font-weight: 700;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
         
+        .btn-approve {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+        }
         
+        .btn-approve:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(72, 187, 120, 0.4);
+        }
         
+        .btn-deny {
+            background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
+            color: white;
+        }
         
-        
-        
-        
-        
-        
-        
-        
-        
+        .btn-deny:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(245, 101, 101, 0.4);
+        }
         
         .edit-mode {
             background: linear-gradient(135deg, #fffaf0 0%, #fef5e7 100%) !important;
@@ -458,152 +482,14 @@
             color: white;
         }
         
-        
-        
-        
-        
-        .approval-section {
-            background: white;
-            padding: 50px 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            text-align: center;
-            margin-top: 40px;
-            border: 1px solid #e2e8f0;
-        }
-        
-        .approval-section h3 {
-            color: #2d3748;
-            font-size: 1.6em;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-        
-        .approval-section-subtitle {
-            color: #718096;
-            font-size: 1em;
-            margin-bottom: 35px;
-            font-weight: 400;
-        }
-        
-        .approval-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        .btn-approve, .btn-deny, .btn-unapprove {
-            padding: 16px 40px;
-            font-size: 1em;
-            font-weight: 600;
-            border: 2px solid;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            min-width: 180px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-size: 0.9em;
-        }
-        
-        .btn-approve {
-            background: white;
-            color: #38a169;
-            border-color: #38a169;
-        }
-        
-        .btn-approve:hover {
-            background: #38a169;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(56, 161, 105, 0.3);
-        }
-        
-        .btn-deny {
-            background: white;
-            color: #e53e3e;
-            border-color: #e53e3e;
-        }
-        
-        .btn-deny:hover {
-            background: #e53e3e;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(229, 62, 62, 0.3);
-        }
-        
         .btn-unapprove {
-            background: white;
-            color: #718096;
-            border-color: #cbd5e0;
+            background: linear-gradient(135deg, #718096 0%, #4a5568 100%);
+            color: white;
         }
         
         .btn-unapprove:hover {
-            background: #718096;
-            color: white;
-            border-color: #718096;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(113, 128, 150, 0.3);
-        }
-
-        .btn-approve-email, .btn-deny-email {
-            padding: 10px 24px;
-            border: 2px solid;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.85em;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-        
-        .btn-approve-email {
-            background: white;
-            color: #38a169;
-            border-color: #38a169;
-        }
-        
-        .btn-approve-email:hover {
-            background: #38a169;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(56, 161, 105, 0.3);
-        }
-        
-        .btn-approve-email.approved {
-            background: #38a169;
-            color: white;
-        }
-        
-        .btn-deny-email {
-            background: white;
-            color: #e53e3e;
-            border-color: #e53e3e;
-        }
-        
-        .btn-deny-email:hover {
-            background: #e53e3e;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(229, 62, 62, 0.3);
-        }
-        
-        .btn-deny-email.denied {
-            background: #e53e3e;
-            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(113, 128, 150, 0.4);
         }
         
         @media (max-width: 768px) {
@@ -646,8 +532,8 @@
     <div class="container">
         <div class="header">
             <div class="header-content">
-                <h1>💇 Salon Campaign Review</h1>
-                <p>Bank Statement Mortgage Program for Salon Owners</p>
+                <h1>🦷 Dentist Campaign Review</h1>
+                <p>Bank Statement Mortgage Program for Self-Employed Dentists</p>
             </div>
         </div>
 
@@ -656,7 +542,7 @@
             <div class="info-grid">
                 <div class="info-item">
                     <strong>Target Audience</strong>
-                    <div>Salon Owners & Beauty Professionals</div>
+                    <div>Self-Employed Dentists</div>
                 </div>
                 <div class="info-item">
                     <strong>Email Sequence</strong>
@@ -685,8 +571,8 @@
                         <span class="subject-label">Subject Line</span>
                         <span class="edit-label">← Edit Subject</span>
                     </div>
-                    <div class="subject-display" id="subject-1-display">Salon owner denied mortgage despite $300K+ deposits?</div>
-                    <input type="text" class="subject-input" id="subject-1-input" style="display:none;" value="Salon owner denied mortgage despite $300K+ deposits?">
+                    <div class="subject-display" id="subject-1-display">Dentist denied mortgage despite $400K+ deposits?</div>
+                    <input type="text" class="subject-input" id="subject-1-input" style="display:none;" value="Dentist denied mortgage despite $400K+ deposits?">
                 </div>
                 
                 <div class="body-section">
@@ -696,62 +582,56 @@
                     </div>
                     <div class="email-body-display" id="body-1-display">Hi [First Name],
 
-I just helped a salon owner close on a $750K home in [City].
+I just helped a dentist close on a $950K home in [City].
 
-Chase told her she only qualified for a $250K mortgage.
+Chase told her she only qualified for a $400K mortgage.
 
-The difference? I looked at her actual salon deposits — not her tax returns showing $45K after deductions.
+The difference? I looked at her actual practice deposits — not her tax returns showing $67K after deductions.
 
 Here's the best part: I never looked at a single withdrawal.
 
-Not the product inventory. Not the Mercedes payment. Not Vegas for the hair show. Nothing.
+Not the Porsche payment. Not the country club. Not Rome. Nothing.
 
-Traditional lenders see your W-2 and scrutinize every expense. Meanwhile, you're depositing $25-40K monthly.
+Traditional mortgage lenders see your W-2 and scrutinize every expense. Meanwhile, you're depositing $30-50K monthly.
 
 Our Bank Statement Mortgage only counts what comes IN — never what goes OUT.
 
-Three salon owners closed with me last month. All qualified for 40-60% more.
+Three dentists closed mortgages with me last month. All qualified for 40-60% more.
 
 Ready to see what mortgage you actually qualify for?
 Just reply with your phone number. I'll call you today.
-(Or simply reply "YES" and we can start the conversation here)
-
-Thanks,
-Michael</div>
+(Or simply reply "YES" and we can start the conversation here)</div>
                     <textarea class="email-body-textarea" id="body-1-input" style="display:none;">Hi [First Name],
 
-I just helped a salon owner close on a $750K home in [City].
+I just helped a dentist close on a $950K home in [City].
 
-Chase told her she only qualified for a $250K mortgage.
+Chase told her she only qualified for a $400K mortgage.
 
-The difference? I looked at her actual salon deposits — not her tax returns showing $45K after deductions.
+The difference? I looked at her actual practice deposits — not her tax returns showing $67K after deductions.
 
 Here's the best part: I never looked at a single withdrawal.
 
-Not the product inventory. Not the Mercedes payment. Not Vegas for the hair show. Nothing.
+Not the Porsche payment. Not the country club. Not Rome. Nothing.
 
-Traditional lenders see your W-2 and scrutinize every expense. Meanwhile, you're depositing $25-40K monthly.
+Traditional mortgage lenders see your W-2 and scrutinize every expense. Meanwhile, you're depositing $30-50K monthly.
 
 Our Bank Statement Mortgage only counts what comes IN — never what goes OUT.
 
-Three salon owners closed with me last month. All qualified for 40-60% more.
+Three dentists closed mortgages with me last month. All qualified for 40-60% more.
 
 Ready to see what mortgage you actually qualify for?
 Just reply with your phone number. I'll call you today.
-(Or simply reply "YES" and we can start the conversation here)
-
-Thanks,
-Michael</textarea>
+(Or simply reply "YES" and we can start the conversation here)</textarea>
                 </div>
                 
-                <div class="signature">Thanks,
-Michael</div>
+                <div class="signature">Best,
+Michael McDermott
+NMLS #1036304</div>
 
                 <div class="comments-section">
                     <div class="comments-label">💬 Comments & Feedback</div>
-                    <textarea class="comments-textarea" id="comments-1-input" placeholder="Add your comments, suggestions, or feedback here..."></textarea>
-                    <button class="btn-submit-comment" onclick="submitComment(1)">💾 Submit Comment</button>
-                    <span class="comments-saved" id="comments-saved-1" style="display:none;">✓ Comment Saved</span>
+                    <div class="comments-display" id="comments-1-display"><span class="comments-empty">No comments yet. Click edit to add feedback.</span></div>
+                    <textarea class="comments-textarea" id="comments-1-input" style="display:none;" placeholder="Add your comments, suggestions, or feedback here..."></textarea>
                 </div>
 
                 <div class="edit-controls">
@@ -759,8 +639,6 @@ Michael</div>
                     <button class="btn btn-save" onclick="saveEmail(1)" style="display:none;">💾 Save Changes</button>
                     <button class="btn btn-undo" onclick="undoEmail(1)" style="display:none;">↩️ Restore Original</button>
                     <button class="btn btn-cancel" onclick="cancelEdit(1)" style="display:none;">✖️ Cancel</button>
-                    <button class="btn-approve-email" id="approve-email-1" onclick="approveEmail(1)">✓ Approve</button>
-                    <button class="btn-deny-email" id="deny-email-1" onclick="denyEmail(1)">✗ Deny</button>
                 </div>
             </div>
         </div>
@@ -777,8 +655,8 @@ Michael</div>
                         <span class="subject-label">Subject Line</span>
                         <span class="edit-label">← Edit Subject</span>
                     </div>
-                    <div class="subject-display" id="subject-2-display">Forgot to mention: We ignore your business expenses completely</div>
-                    <input type="text" class="subject-input" id="subject-2-input" style="display:none;" value="Forgot to mention: We ignore your business expenses completely">
+                    <div class="subject-display" id="subject-2-display">Forgot to mention: We ignore your expenses completely</div>
+                    <input type="text" class="subject-input" id="subject-2-input" style="display:none;" value="Forgot to mention: We ignore your expenses completely">
                 </div>
                 
                 <div class="body-section">
@@ -790,20 +668,20 @@ Michael</div>
 
 Real quick on that mortgage —
 
-Just ran numbers for another salon owner in [City].
+Just ran numbers for another dentist in [City].
 
-Traditional mortgage lender: "Why did you withdraw $20K for inventory last month?"
-Her: "Running a business."
+Traditional mortgage lender: "Why did you withdraw $30K last March?"
+Him: "None of your business."
 Traditional lender: "Mortgage denied."
 
 My review:
-- Counted her deposits: $280K annually
-- Ignored her withdrawals: 100% of them
-- Mortgage approval: $825K
+- Counted his deposits: $380K annually
+- Ignored his withdrawals: 100% of them
+- Mortgage approval: $1.1M
 
-I don't care if you bought new chairs, inventory, or renovated your salon.
+I don't care if you bought a boat, Bitcoin, or a country club membership.
 
-Your business expenses = Your business.
+Your withdrawals = Your business.
 Your deposits = Your mortgage qualification.
 
 Want to know what mortgage amount you actually qualify for?
@@ -815,20 +693,20 @@ No expense scrutiny. Ever.</div>
 
 Real quick on that mortgage —
 
-Just ran numbers for another salon owner in [City].
+Just ran numbers for another dentist in [City].
 
-Traditional mortgage lender: "Why did you withdraw $20K for inventory last month?"
-Her: "Running a business."
+Traditional mortgage lender: "Why did you withdraw $30K last March?"
+Him: "None of your business."
 Traditional lender: "Mortgage denied."
 
 My review:
-- Counted her deposits: $280K annually
-- Ignored her withdrawals: 100% of them
-- Mortgage approval: $825K
+- Counted his deposits: $380K annually
+- Ignored his withdrawals: 100% of them
+- Mortgage approval: $1.1M
 
-I don't care if you bought new chairs, inventory, or renovated your salon.
+I don't care if you bought a boat, Bitcoin, or a country club membership.
 
-Your business expenses = Your business.
+Your withdrawals = Your business.
 Your deposits = Your mortgage qualification.
 
 Want to know what mortgage amount you actually qualify for?
@@ -842,9 +720,8 @@ No expense scrutiny. Ever.</textarea>
 
                 <div class="comments-section">
                     <div class="comments-label">💬 Comments & Feedback</div>
-                    <textarea class="comments-textarea" id="comments-2-input" placeholder="Add your comments, suggestions, or feedback here..."></textarea>
-                    <button class="btn-submit-comment" onclick="submitComment(2)">💾 Submit Comment</button>
-                    <span class="comments-saved" id="comments-saved-2" style="display:none;">✓ Comment Saved</span>
+                    <div class="comments-display" id="comments-2-display"><span class="comments-empty">No comments yet. Click edit to add feedback.</span></div>
+                    <textarea class="comments-textarea" id="comments-2-input" style="display:none;" placeholder="Add your comments, suggestions, or feedback here..."></textarea>
                 </div>
 
                 <div class="edit-controls">
@@ -852,8 +729,6 @@ No expense scrutiny. Ever.</textarea>
                     <button class="btn btn-save" onclick="saveEmail(2)" style="display:none;">💾 Save Changes</button>
                     <button class="btn btn-undo" onclick="undoEmail(2)" style="display:none;">↩️ Restore Original</button>
                     <button class="btn btn-cancel" onclick="cancelEdit(2)" style="display:none;">✖️ Cancel</button>
-                    <button class="btn-approve-email" id="approve-email-2" onclick="approveEmail(2)">✓ Approve</button>
-                    <button class="btn-deny-email" id="deny-email-2" onclick="denyEmail(2)">✗ Deny</button>
                 </div>
             </div>
         </div>
@@ -870,8 +745,8 @@ No expense scrutiny. Ever.</textarea>
                         <span class="subject-label">Subject Line</span>
                         <span class="edit-label">← Edit Subject</span>
                     </div>
-                    <div class="subject-display" id="subject-3-display">Approved a salon owner banks rejected 3 times</div>
-                    <input type="text" class="subject-input" id="subject-3-input" style="display:none;" value="Approved a salon owner banks rejected 3 times">
+                    <div class="subject-display" id="subject-3-display">Approved a mortgage that banks rejected 3 times</div>
+                    <input type="text" class="subject-input" id="subject-3-input" style="display:none;" value="Approved a mortgage that banks rejected 3 times">
                 </div>
                 
                 <div class="body-section">
@@ -881,23 +756,23 @@ No expense scrutiny. Ever.</textarea>
                     </div>
                     <div class="email-body-display" id="body-3-display">[First Name],
 
-Wells Fargo rejected a salon owner's mortgage 3 times.
+Wells Fargo rejected a dentist's mortgage 3 times.
 
 They kept asking:
-- "What's this $12K withdrawal for supplies?"
+- "What's this $15K withdrawal?"
 
-She walked out. Called me instead.
+He walked out. Called me instead.
 
 My mortgage review:
-✓ Counted $380K in deposits
+✓ Counted $500K in deposits
 ✗ Ignored every withdrawal
-= Mortgage approved for $725K in 48 hours
+= Mortgage approved for $925K in 48 hours
 
-I will NEVER ask about your inventory purchases when qualifying your mortgage. Ever.
+I will NEVER ask about your withdrawals when qualifying your mortgage. Ever.
 
 The mortgage process:
 1. Send 12 months of bank statements
-2. I average deposits only (chair rental, services, retail - all of it)
+2. I average deposits only
 3. You get a mortgage based on real income
 
 Ready for a mortgage without the interrogation?
@@ -905,23 +780,23 @@ Just reply with your phone number. I'll call you today.
 (Or simply reply "YES" and we can start the conversation here)</div>
                     <textarea class="email-body-textarea" id="body-3-input" style="display:none;">[First Name],
 
-Wells Fargo rejected a salon owner's mortgage 3 times.
+Wells Fargo rejected a dentist's mortgage 3 times.
 
 They kept asking:
-- "What's this $12K withdrawal for supplies?"
+- "What's this $15K withdrawal?"
 
-She walked out. Called me instead.
+He walked out. Called me instead.
 
 My mortgage review:
-✓ Counted $380K in deposits
+✓ Counted $500K in deposits
 ✗ Ignored every withdrawal
-= Mortgage approved for $725K in 48 hours
+= Mortgage approved for $925K in 48 hours
 
-I will NEVER ask about your inventory purchases when qualifying your mortgage. Ever.
+I will NEVER ask about your withdrawals when qualifying your mortgage. Ever.
 
 The mortgage process:
 1. Send 12 months of bank statements
-2. I average deposits only (chair rental, services, retail - all of it)
+2. I average deposits only
 3. You get a mortgage based on real income
 
 Ready for a mortgage without the interrogation?
@@ -933,9 +808,8 @@ Just reply with your phone number. I'll call you today.
 
                 <div class="comments-section">
                     <div class="comments-label">💬 Comments & Feedback</div>
-                    <textarea class="comments-textarea" id="comments-3-input" placeholder="Add your comments, suggestions, or feedback here..."></textarea>
-                    <button class="btn-submit-comment" onclick="submitComment(3)">💾 Submit Comment</button>
-                    <span class="comments-saved" id="comments-saved-3" style="display:none;">✓ Comment Saved</span>
+                    <div class="comments-display" id="comments-3-display"><span class="comments-empty">No comments yet. Click edit to add feedback.</span></div>
+                    <textarea class="comments-textarea" id="comments-3-input" style="display:none;" placeholder="Add your comments, suggestions, or feedback here..."></textarea>
                 </div>
 
                 <div class="edit-controls">
@@ -943,8 +817,6 @@ Just reply with your phone number. I'll call you today.
                     <button class="btn btn-save" onclick="saveEmail(3)" style="display:none;">💾 Save Changes</button>
                     <button class="btn btn-undo" onclick="undoEmail(3)" style="display:none;">↩️ Restore Original</button>
                     <button class="btn btn-cancel" onclick="cancelEdit(3)" style="display:none;">✖️ Cancel</button>
-                    <button class="btn-approve-email" id="approve-email-3" onclick="approveEmail(3)">✓ Approve</button>
-                    <button class="btn-deny-email" id="deny-email-3" onclick="denyEmail(3)">✗ Deny</button>
                 </div>
             </div>
         </div>
@@ -961,8 +833,8 @@ Just reply with your phone number. I'll call you today.
                         <span class="subject-label">Subject Line</span>
                         <span class="edit-label">← Edit Subject</span>
                     </div>
-                    <div class="subject-display" id="subject-4-display">While banks question every supply order, we approve mortgages</div>
-                    <input type="text" class="subject-input" id="subject-4-input" style="display:none;" value="While banks question every supply order, we approve mortgages">
+                    <div class="subject-display" id="subject-4-display">While banks ask 20 questions, we approve mortgages on deposits</div>
+                    <input type="text" class="subject-input" id="subject-4-input" style="display:none;" value="While banks ask 20 questions, we approve mortgages on deposits">
                 </div>
                 
                 <div class="body-section">
@@ -972,16 +844,16 @@ Just reply with your phone number. I'll call you today.
                     </div>
                     <div class="email-body-display" id="body-4-display">[First Name],
 
-While traditional mortgage lenders are analyzing every product purchase...
+While traditional mortgage lenders are analyzing every withdrawal and expense...
 
 We're taking a different approach — approving mortgages based only on what you deposit each month.
 
-No expense reviews.
-No questions about inventory.
-No judgment about that $60K salon renovation.
-No questions about the hair show in Vegas.
+No withdrawal reviews.
+No expense reports.
+No judgment about that $80K car.
+No questions about Rome.
 
-Your deposits from chair rentals, services, and retail tell me everything I need to approve your mortgage.
+Your deposits tell me everything I need to approve your mortgage.
 
 Look — mortgage rates are still good. Guidelines are flexible. This combo expires soon.
 
@@ -989,19 +861,19 @@ Find out what mortgage you REALLY qualify for:
 Just reply with your phone number. I'll call you today.
 (Or simply reply "YES" and we can start the conversation here)
 
-Already helped 42 salon owners get mortgages this year without explaining a single withdrawal. You're probably #43.</div>
+Already helped 47 dentists get mortgages this year without explaining a single withdrawal. You're probably #48.</div>
                     <textarea class="email-body-textarea" id="body-4-input" style="display:none;">[First Name],
 
-While traditional mortgage lenders are analyzing every product purchase...
+While traditional mortgage lenders are analyzing every withdrawal and expense...
 
 We're taking a different approach — approving mortgages based only on what you deposit each month.
 
-No expense reviews.
-No questions about inventory.
-No judgment about that $60K salon renovation.
-No questions about the hair show in Vegas.
+No withdrawal reviews.
+No expense reports.
+No judgment about that $80K car.
+No questions about Rome.
 
-Your deposits from chair rentals, services, and retail tell me everything I need to approve your mortgage.
+Your deposits tell me everything I need to approve your mortgage.
 
 Look — mortgage rates are still good. Guidelines are flexible. This combo expires soon.
 
@@ -1009,16 +881,15 @@ Find out what mortgage you REALLY qualify for:
 Just reply with your phone number. I'll call you today.
 (Or simply reply "YES" and we can start the conversation here)
 
-Already helped 42 salon owners get mortgages this year without explaining a single withdrawal. You're probably #43.</textarea>
+Already helped 47 dentists get mortgages this year without explaining a single withdrawal. You're probably #48.</textarea>
                 </div>
                 
                 <div class="signature">Michael</div>
 
                 <div class="comments-section">
                     <div class="comments-label">💬 Comments & Feedback</div>
-                    <textarea class="comments-textarea" id="comments-4-input" placeholder="Add your comments, suggestions, or feedback here..."></textarea>
-                    <button class="btn-submit-comment" onclick="submitComment(4)">💾 Submit Comment</button>
-                    <span class="comments-saved" id="comments-saved-4" style="display:none;">✓ Comment Saved</span>
+                    <div class="comments-display" id="comments-4-display"><span class="comments-empty">No comments yet. Click edit to add feedback.</span></div>
+                    <textarea class="comments-textarea" id="comments-4-input" style="display:none;" placeholder="Add your comments, suggestions, or feedback here..."></textarea>
                 </div>
 
                 <div class="edit-controls">
@@ -1026,8 +897,6 @@ Already helped 42 salon owners get mortgages this year without explaining a sing
                     <button class="btn btn-save" onclick="saveEmail(4)" style="display:none;">💾 Save Changes</button>
                     <button class="btn btn-undo" onclick="undoEmail(4)" style="display:none;">↩️ Restore Original</button>
                     <button class="btn btn-cancel" onclick="cancelEdit(4)" style="display:none;">✖️ Cancel</button>
-                    <button class="btn-approve-email" id="approve-email-4" onclick="approveEmail(4)">✓ Approve</button>
-                    <button class="btn-deny-email" id="deny-email-4" onclick="denyEmail(4)">✗ Deny</button>
                 </div>
             </div>
         </div>
@@ -1044,8 +913,8 @@ Already helped 42 salon owners get mortgages this year without explaining a sing
                         <span class="subject-label">Subject Line</span>
                         <span class="edit-label">← Edit Subject</span>
                     </div>
-                    <div class="subject-display" id="subject-5-display">Your business expenses are your business (not mine)</div>
-                    <input type="text" class="subject-input" id="subject-5-input" style="display:none;" value="Your business expenses are your business (not mine)">
+                    <div class="subject-display" id="subject-5-display">Your spending is your business (not mine)</div>
+                    <input type="text" class="subject-input" id="subject-5-input" style="display:none;" value="Your spending is your business (not mine)">
                 </div>
                 
                 <div class="body-section">
@@ -1060,8 +929,8 @@ Last email, then I'll leave you alone.
 Our Bank Statement Mortgage: We count deposits. Ignore withdrawals. Period.
 
 No explaining:
-- Product inventory
-- Chair rental payments
+- Large family transfers
+- Investment purchases
 - Personal expenses of any kind
 
 Not my business. Never will be.
@@ -1073,7 +942,7 @@ Reply with:
 - "YES" (let's talk)
 - "NO" (I'll delete you)
 
-The inventory purchases that disqualify you at traditional banks? They're irrelevant in my underwriting process.
+The withdrawals that disqualify you at traditional banks? They're irrelevant in my underwriting process.
 
 That's the fundamental difference.</div>
                     <textarea class="email-body-textarea" id="body-5-input" style="display:none;">[First Name],
@@ -1083,8 +952,8 @@ Last email, then I'll leave you alone.
 Our Bank Statement Mortgage: We count deposits. Ignore withdrawals. Period.
 
 No explaining:
-- Product inventory
-- Chair rental payments
+- Large family transfers
+- Investment purchases
 - Personal expenses of any kind
 
 Not my business. Never will be.
@@ -1096,7 +965,7 @@ Reply with:
 - "YES" (let's talk)
 - "NO" (I'll delete you)
 
-The inventory purchases that disqualify you at traditional banks? They're irrelevant in my underwriting process.
+The withdrawals that disqualify you at traditional banks? They're irrelevant in my underwriting process.
 
 That's the fundamental difference.</textarea>
                 </div>
@@ -1105,9 +974,8 @@ That's the fundamental difference.</textarea>
 
                 <div class="comments-section">
                     <div class="comments-label">💬 Comments & Feedback</div>
-                    <textarea class="comments-textarea" id="comments-5-input" placeholder="Add your comments, suggestions, or feedback here..."></textarea>
-                    <button class="btn-submit-comment" onclick="submitComment(5)">💾 Submit Comment</button>
-                    <span class="comments-saved" id="comments-saved-5" style="display:none;">✓ Comment Saved</span>
+                    <div class="comments-display" id="comments-5-display"><span class="comments-empty">No comments yet. Click edit to add feedback.</span></div>
+                    <textarea class="comments-textarea" id="comments-5-input" style="display:none;" placeholder="Add your comments, suggestions, or feedback here..."></textarea>
                 </div>
 
                 <div class="edit-controls">
@@ -1115,15 +983,12 @@ That's the fundamental difference.</textarea>
                     <button class="btn btn-save" onclick="saveEmail(5)" style="display:none;">💾 Save Changes</button>
                     <button class="btn btn-undo" onclick="undoEmail(5)" style="display:none;">↩️ Restore Original</button>
                     <button class="btn btn-cancel" onclick="cancelEdit(5)" style="display:none;">✖️ Cancel</button>
-                    <button class="btn-approve-email" id="approve-email-5" onclick="approveEmail(5)">✓ Approve</button>
-                    <button class="btn-deny-email" id="deny-email-5" onclick="denyEmail(5)">✗ Deny</button>
                 </div>
             </div>
         </div>
 
         <div class="approval-section">
             <h3>Campaign Decision</h3>
-            <p class="approval-section-subtitle">Review and approve or deny this email campaign</p>
             <div id="decision-status"></div>
             <div class="approval-buttons">
                 <button class="btn-approve" onclick="approveCampaign()">✓ Approve Campaign</button>
@@ -1139,7 +1004,7 @@ That's the fundamental difference.</textarea>
             window.location.href = 'client-login.html';
         }
 
-        const campaignName = 'salon';
+        const campaignName = 'dentist';
         const originalContent = {};
         const savedContent = {};
 
@@ -1162,7 +1027,6 @@ That's the fundamental difference.</textarea>
             
             loadSavedContent();
             loadDecision();
-            loadEmailDecisions();
         }
 
         function editEmail(num) {
@@ -1171,12 +1035,16 @@ That's the fundamental difference.</textarea>
             const subjectInput = document.getElementById(`subject-${num}-input`);
             const bodyDisplay = document.getElementById(`body-${num}-display`);
             const bodyInput = document.getElementById(`body-${num}-input`);
+            const commentsDisplay = document.getElementById(`comments-${num}-display`);
+            const commentsInput = document.getElementById(`comments-${num}-input`);
             
-            // Toggle displays (comments are always visible now)
+            // Toggle displays
             subjectDisplay.style.display = 'none';
             subjectInput.style.display = 'block';
             bodyDisplay.style.display = 'none';
             bodyInput.style.display = 'block';
+            commentsDisplay.style.display = 'none';
+            commentsInput.style.display = 'block';
             
             // Toggle buttons
             const controls = card.querySelector('.edit-controls');
@@ -1191,49 +1059,32 @@ That's the fundamental difference.</textarea>
         function saveEmail(num) {
             const subjectInput = document.getElementById(`subject-${num}-input`);
             const bodyInput = document.getElementById(`body-${num}-input`);
+            const commentsInput = document.getElementById(`comments-${num}-input`);
             const subjectDisplay = document.getElementById(`subject-${num}-display`);
             const bodyDisplay = document.getElementById(`body-${num}-display`);
+            const commentsDisplay = document.getElementById(`comments-${num}-display`);
             
             // Update displays
             subjectDisplay.textContent = subjectInput.value;
             bodyDisplay.textContent = bodyInput.value;
             
-            // Save to storage (get existing comments if any)
-            const commentsInput = document.getElementById(`comments-${num}-input`);
+            if (commentsInput.value.trim()) {
+                commentsDisplay.innerHTML = commentsInput.value;
+            } else {
+                commentsDisplay.innerHTML = '<span class="comments-empty">No comments yet. Click edit to add feedback.</span>';
+            }
+            
+            // Save to storage
             if (!savedContent[campaignName]) savedContent[campaignName] = {};
             savedContent[campaignName][num] = {
                 subject: subjectInput.value,
                 body: bodyInput.value,
-                comments: commentsInput.value || ''
+                comments: commentsInput.value
             };
             localStorage.setItem('campaign-edits', JSON.stringify(savedContent));
             
             exitEditMode(num);
             showSavedIndicator();
-        }
-        
-        function submitComment(num) {
-            const commentsInput = document.getElementById(`comments-${num}-input`);
-            const savedIndicator = document.getElementById(`comments-saved-${num}`);
-            
-            // Save comment to storage
-            if (!savedContent[campaignName]) savedContent[campaignName] = {};
-            if (!savedContent[campaignName][num]) {
-                savedContent[campaignName][num] = {
-                    subject: document.getElementById(`subject-${num}-input`).value,
-                    body: document.getElementById(`body-${num}-input`).value,
-                    comments: commentsInput.value
-                };
-            } else {
-                savedContent[campaignName][num].comments = commentsInput.value;
-            }
-            localStorage.setItem('campaign-edits', JSON.stringify(savedContent));
-            
-            // Show saved indicator
-            savedIndicator.style.display = 'inline-block';
-            setTimeout(() => {
-                savedIndicator.style.display = 'none';
-            }, 3000);
         }
 
         function undoEmail(num) {
@@ -1252,6 +1103,7 @@ That's the fundamental difference.</textarea>
                     commentsInput.value = '';
                     subjectDisplay.textContent = original.subject;
                     bodyDisplay.textContent = original.body;
+                    commentsDisplay.innerHTML = '<span class="comments-empty">No comments yet. Click edit to add feedback.</span>';
                     
                     // Remove from saved
                     if (savedContent[campaignName] && savedContent[campaignName][num]) {
@@ -1285,11 +1137,15 @@ That's the fundamental difference.</textarea>
             const subjectInput = document.getElementById(`subject-${num}-input`);
             const bodyDisplay = document.getElementById(`body-${num}-display`);
             const bodyInput = document.getElementById(`body-${num}-input`);
+            const commentsDisplay = document.getElementById(`comments-${num}-display`);
+            const commentsInput = document.getElementById(`comments-${num}-input`);
             
             subjectDisplay.style.display = 'block';
             subjectInput.style.display = 'none';
             bodyDisplay.style.display = 'block';
             bodyInput.style.display = 'none';
+            commentsDisplay.style.display = 'block';
+            commentsInput.style.display = 'none';
             
             const controls = card.querySelector('.edit-controls');
             controls.children[0].style.display = 'inline-flex'; // Edit
@@ -1334,6 +1190,7 @@ That's the fundamental difference.</textarea>
                             bodyInput.value = content.body;
                             
                             if (content.comments && content.comments.trim()) {
+                                commentsDisplay.innerHTML = content.comments;
                                 commentsInput.value = content.comments;
                             }
                         }
@@ -1343,18 +1200,18 @@ That's the fundamental difference.</textarea>
         }
 
         function approveCampaign() {
-            if (confirm('Are you sure you want to APPROVE the Salon campaign?')) {
+            if (confirm('Are you sure you want to APPROVE the Dentist campaign?')) {
                 localStorage.setItem(`campaign-${campaignName}`, 'approved');
                 loadDecision();
-                alert('✓ Salon campaign has been APPROVED!');
+                alert('✓ Dentist campaign has been APPROVED!');
             }
         }
 
         function denyCampaign() {
-            if (confirm('Are you sure you want to DENY the Salon campaign?')) {
+            if (confirm('Are you sure you want to DENY the Dentist campaign?')) {
                 localStorage.setItem(`campaign-${campaignName}`, 'denied');
                 loadDecision();
-                alert('✗ Salon campaign has been DENIED.');
+                alert('✗ Dentist campaign has been DENIED.');
             }
         }
 
@@ -1370,63 +1227,10 @@ That's the fundamental difference.</textarea>
         }
 
         function unapprovedCampaign() {
-            if (confirm('Are you sure you want to UNAPPROVE the Salon campaign? This will reset it to pending status.')) {
+            if (confirm('Are you sure you want to UNAPPROVE the Dentist campaign? This will reset it to pending status.')) {
                 localStorage.removeItem(`campaign-${campaignName}`);
-                const statusDiv = document.getElementById('decision-status');
-                statusDiv.innerHTML = ''; // Clear the status badge
-                alert('↺ Salon campaign has been reset to PENDING status.');
-            }
-        }
-        
-        function approveEmail(num) {
-            const approveBtn = document.getElementById(`approve-email-${num}`);
-            const denyBtn = document.getElementById(`deny-email-${num}`);
-            
-            // Toggle approved state
-            if (approveBtn.classList.contains('approved')) {
-                // Unapprove
-                approveBtn.classList.remove('approved');
-                localStorage.removeItem(`email-${campaignName}-${num}`);
-            } else {
-                // Approve
-                approveBtn.classList.add('approved');
-                denyBtn.classList.remove('denied');
-                localStorage.setItem(`email-${campaignName}-${num}`, 'approved');
-                
-                // Update SmartLead when email is approved
-                updateSmartLeadCampaign(num);
-            }
-        }
-        
-        function denyEmail(num) {
-            const approveBtn = document.getElementById(`approve-email-${num}`);
-            const denyBtn = document.getElementById(`deny-email-${num}`);
-            
-            // Toggle denied state
-            if (denyBtn.classList.contains('denied')) {
-                // Undeny
-                denyBtn.classList.remove('denied');
-                localStorage.removeItem(`email-${campaignName}-${num}`);
-            } else {
-                // Deny
-                denyBtn.classList.add('denied');
-                approveBtn.classList.remove('approved');
-                localStorage.setItem(`email-${campaignName}-${num}`, 'denied');
-            }
-        }
-        
-        function loadEmailDecisions() {
-            // Load individual email approval/denial states
-            for (let i = 1; i <= 5; i++) {
-                const decision = localStorage.getItem(`email-${campaignName}-${i}`);
-                const approveBtn = document.getElementById(`approve-email-${i}`);
-                const denyBtn = document.getElementById(`deny-email-${i}`);
-                
-                if (decision === 'approved' && approveBtn) {
-                    approveBtn.classList.add('approved');
-                } else if (decision === 'denied' && denyBtn) {
-                    denyBtn.classList.add('denied');
-                }
+                loadDecision();
+                alert('↺ Dentist campaign has been reset to PENDING status.');
             }
         }
         
@@ -1437,95 +1241,6 @@ That's the fundamental difference.</textarea>
             }
         }
 
-
-        // SmartLead Integration
-        const SMARTLEAD_CAMPAIGN_ID = null; // Set this to your SmartLead campaign ID
-        
-        async function updateSmartLeadCampaign(emailNumber) {
-            if (!SMARTLEAD_CAMPAIGN_ID) {
-                console.log('SmartLead campaign ID not configured');
-                return;
-            }
-            
-            // Check if all 5 emails are now approved
-            const allApproved = checkAllEmailsApproved();
-            
-            if (allApproved) {
-                showSmartLeadNotification('All emails approved! Campaign ready to launch in SmartLead.', 'success');
-                
-                // Uncomment when SmartLead API is ready
-                // try {
-                //     const response = await smartlead_update_campaign_status({
-                //         campaign_id: SMARTLEAD_CAMPAIGN_ID,
-                //         status: 'START'
-                //     });
-                //     showSmartLeadNotification('✓ SmartLead campaign started successfully!', 'success');
-                // } catch (error) {
-                //     showSmartLeadNotification('⚠️ Error starting SmartLead campaign: ' + error.message, 'error');
-                // }
-            } else {
-                const approvedCount = getApprovedEmailCount();
-                showSmartLeadNotification(`Email ${emailNumber} approved (${approvedCount}/5 emails approved)`, 'info');
-            }
-        }
-        
-        function checkAllEmailsApproved() {
-            for (let i = 1; i <= 5; i++) {
-                const decision = localStorage.getItem(`email-${campaignName}-${i}`);
-                if (decision !== 'approved') {
-                    return false;
-                }
-            }
-            return true;
-        }
-        
-        function getApprovedEmailCount() {
-            let count = 0;
-            for (let i = 1; i <= 5; i++) {
-                const decision = localStorage.getItem(`email-${campaignName}-${i}`);
-                if (decision === 'approved') {
-                    count++;
-                }
-            }
-            return count;
-        }
-        
-        function showSmartLeadNotification(message, type = 'success') {
-            const notification = document.createElement('div');
-            notification.className = 'smartlead-notification';
-            
-            const bgColors = {
-                success: 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)',
-                error: 'linear-gradient(135deg, #f56565 0%, #e53e3e 100%)',
-                info: 'linear-gradient(135deg, #4299e1 0%, #3182ce 100%)'
-            };
-            
-            notification.style.cssText = `
-                position: fixed;
-                top: 120px;
-                right: 20px;
-                padding: 15px 25px;
-                background: ${bgColors[type]};
-                color: white;
-                border-radius: 10px;
-                font-weight: 600;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-                z-index: 10000;
-                animation: slideIn 0.3s ease-out;
-                max-width: 400px;
-            `;
-            
-            notification.textContent = message;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.opacity = '0';
-                notification.style.transform = 'translateX(400px)';
-                notification.style.transition = 'all 0.3s ease-out';
-                setTimeout(() => notification.remove(), 300);
-            }, 5000);
-        }
-        
         // Initialize on load
         window.addEventListener('DOMContentLoaded', init);
     </script>
