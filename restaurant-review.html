@@ -637,6 +637,62 @@
         }
     
 
+
+        /* PDF Export Button */
+        .pdf-export-section {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 25px 35px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .pdf-export-info {
+            flex: 1;
+        }
+        
+        .pdf-export-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 5px;
+        }
+        
+        .pdf-export-subtitle {
+            font-size: 0.9em;
+            color: #94a3b8;
+        }
+        
+        .btn-export-pdf {
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-export-pdf:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-export-pdf:active {
+            transform: translateY(0);
+        }
+
         /* DARK THEME OVERLAY */
 /* Dark Theme Overlay for Campaign Review Pages */
 body {
@@ -1618,6 +1674,214 @@ That's the fundamental difference.</textarea>
             }
         }
 
+
+
+        // PDF Export Functionality
+        function exportToPDF() {
+            const campaignTitle = document.querySelector('.header h1').textContent;
+            
+            // Create a clean version for PDF
+            const pdfContent = {
+                title: campaignTitle,
+                subtitle: document.querySelector('.header p').textContent,
+                emails: []
+            };
+            
+            // Collect all email data
+            for (let i = 1; i <= 5; i++) {
+                const subjectDisplay = document.getElementById(`subject-${i}-display`);
+                const bodyDisplay = document.getElementById(`body-${i}-display`);
+                const commentsInput = document.getElementById(`comments-${i}-input`);
+                const emailCard = subjectDisplay.closest('.email-card');
+                const emailTitle = emailCard.querySelector('h2').textContent;
+                const timing = emailCard.querySelector('.email-card p').textContent;
+                
+                if (subjectDisplay && bodyDisplay) {
+                    pdfContent.emails.push({
+                        number: i,
+                        title: emailTitle,
+                        timing: timing,
+                        subject: subjectDisplay.textContent,
+                        body: bodyDisplay.textContent,
+                        comments: commentsInput ? commentsInput.value : ''
+                    });
+                }
+            }
+            
+            // Generate PDF using HTML
+            generatePDFFromContent(pdfContent);
+        }
+        
+        function generatePDFFromContent(content) {
+            // Create a new window for printing
+            const printWindow = window.open('', '', 'width=800,height=600');
+            
+            const html = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>${content.title} - Email Sequence</title>
+                    <style>
+                        @media print {
+                            body { margin: 0; }
+                            .page-break { page-break-before: always; }
+                        }
+                        body {
+                            font-family: 'Inter', Arial, sans-serif;
+                            line-height: 1.6;
+                            color: #333;
+                            max-width: 800px;
+                            margin: 0 auto;
+                            padding: 40px 20px;
+                        }
+                        .pdf-header {
+                            text-align: center;
+                            margin-bottom: 50px;
+                            padding-bottom: 20px;
+                            border-bottom: 3px solid #667eea;
+                        }
+                        .pdf-title {
+                            font-size: 2.5em;
+                            font-weight: 800;
+                            color: #1a202c;
+                            margin-bottom: 10px;
+                        }
+                        .pdf-subtitle {
+                            font-size: 1.1em;
+                            color: #718096;
+                        }
+                        .email-section {
+                            margin-bottom: 50px;
+                            padding: 30px;
+                            background: #f7fafc;
+                            border-radius: 12px;
+                            border-left: 4px solid #667eea;
+                        }
+                        .email-header {
+                            margin-bottom: 20px;
+                        }
+                        .email-number {
+                            font-size: 1.4em;
+                            font-weight: 700;
+                            color: #667eea;
+                            margin-bottom: 5px;
+                        }
+                        .email-timing {
+                            color: #718096;
+                            font-size: 0.9em;
+                            margin-bottom: 20px;
+                        }
+                        .field-label {
+                            font-size: 0.85em;
+                            text-transform: uppercase;
+                            color: #667eea;
+                            font-weight: 600;
+                            letter-spacing: 0.5px;
+                            margin-top: 20px;
+                            margin-bottom: 8px;
+                        }
+                        .subject-text {
+                            font-size: 1.2em;
+                            font-weight: 600;
+                            color: #2d3748;
+                            padding: 15px;
+                            background: white;
+                            border-radius: 8px;
+                            margin-bottom: 20px;
+                        }
+                        .body-text {
+                            white-space: pre-line;
+                            padding: 20px;
+                            background: white;
+                            border-radius: 8px;
+                            line-height: 1.8;
+                            color: #2d3748;
+                            margin-bottom: 20px;
+                        }
+                        .comments-text {
+                            white-space: pre-line;
+                            padding: 15px;
+                            background: #fff5e6;
+                            border: 2px solid #ed8936;
+                            border-radius: 8px;
+                            color: #744210;
+                            font-style: italic;
+                        }
+                        .comments-empty {
+                            color: #a0aec0;
+                            font-style: italic;
+                        }
+                        .footer {
+                            margin-top: 50px;
+                            padding-top: 20px;
+                            border-top: 2px solid #e2e8f0;
+                            text-align: center;
+                            color: #718096;
+                            font-size: 0.9em;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="pdf-header">
+                        <div class="pdf-title">${content.title}</div>
+                        <div class="pdf-subtitle">${content.subtitle}</div>
+                    </div>
+                    
+                    ${content.emails.map((email, index) => `
+                        <div class="email-section ${index > 0 ? 'page-break' : ''}">
+                            <div class="email-header">
+                                <div class="email-number">${email.title}</div>
+                                <div class="email-timing">${email.timing}</div>
+                            </div>
+                            
+                            <div class="field-label">Subject Line</div>
+                            <div class="subject-text">${escapeHtml(email.subject)}</div>
+                            
+                            <div class="field-label">Email Body</div>
+                            <div class="body-text">${escapeHtml(email.body)}</div>
+                            
+                            ${email.comments ? `
+                                <div class="field-label">Comments & Feedback</div>
+                                <div class="comments-text">${escapeHtml(email.comments)}</div>
+                            ` : `
+                                <div class="field-label">Comments & Feedback</div>
+                                <div class="comments-empty">No comments provided</div>
+                            `}
+                        </div>
+                    `).join('')}
+                    
+                    <div class="footer">
+                        <p>Generated on ${new Date().toLocaleDateString('en-US', { 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                        })}</p>
+                        <p>Campaign Review System</p>
+                    </div>
+                </body>
+                </html>
+            `;
+            
+            printWindow.document.write(html);
+            printWindow.document.close();
+            
+            // Wait for content to load, then trigger print
+            printWindow.onload = function() {
+                setTimeout(() => {
+                    printWindow.print();
+                    // Close window after printing (user can cancel)
+                    printWindow.onafterprint = function() {
+                        printWindow.close();
+                    };
+                }, 250);
+            };
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
 
         // SmartLead Integration
         const SMARTLEAD_CAMPAIGN_ID = null; // Set this to your SmartLead campaign ID
