@@ -177,6 +177,35 @@
             color: #742a2a;
         }
         
+        .badge-reset-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #718096;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            opacity: 0.8;
+            z-index: 10;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .badge-reset-btn:hover {
+            opacity: 1;
+            background: #4a5568;
+            transform: scale(1.05);
+        }
+        
+        .campaign-card {
+            position: relative;
+        }
+        
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2em;
@@ -282,6 +311,40 @@
                     badge.className = 'status-badge status-pending';
                 }
             });
+        }
+        
+        function handleCardClick(event, url) {
+            // Only navigate if clicking the card itself, not the reset button
+            if (event.target.classList.contains('badge-reset-btn')) {
+                return;
+            }
+            window.location.href = url;
+        }
+        
+        function resetCampaign(event, campaignId, campaignName) {
+            event.stopPropagation(); // Prevent card click
+            
+            if (confirm(`Are you sure you want to RESET all approvals and data for the ${campaignName} campaign?\n\nThis will clear:\n- Campaign approval/denial status\n- Individual email approvals\n- All saved edits\n- All comments\n\nThis action cannot be undone.`)) {
+                // Clear campaign decision
+                localStorage.removeItem(`campaign-${campaignId}`);
+                
+                // Clear individual email decisions (5 emails)
+                for (let i = 1; i <= 5; i++) {
+                    localStorage.removeItem(`email-${campaignId}-${i}`);
+                }
+                
+                // Clear edits and comments
+                const edits = JSON.parse(localStorage.getItem('campaign-edits') || '{}');
+                if (edits[campaignId]) {
+                    delete edits[campaignId];
+                    localStorage.setItem('campaign-edits', JSON.stringify(edits));
+                }
+                
+                // Reload badges
+                loadCampaignStatuses();
+                
+                alert(`✓ ${campaignName} campaign has been reset to default state.`);
+            }
         }
         
         function logout() {
