@@ -683,6 +683,35 @@
             box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
         }
         
+
+        .btn-copy-emails {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
+            white-space: nowrap;
+        }
+        
+        .btn-copy-emails:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(72, 187, 120, 0.4);
+        }
+        
+        .btn-copy-emails.copied {
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+        }
+
         .btn-export-pdf-header:active {
             transform: translateY(0);
         }
