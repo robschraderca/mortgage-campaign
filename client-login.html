@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign Review - Client Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            max-width: 400px;
+            width: 100%;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo h1 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        .logo p {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .login-btn:active {
+            transform: translateY(0);
+        }
+        .error-message {
+            color: #e74c3c;
+            background: #ffe5e5;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+        }
+        .info-text {
+            text-align: center;
+            color: #666;
+            font-size: 0.85em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <h1>🔐 Campaign Review</h1>
+            <p>Michael McDermott, NMLS #1036304</p>
+        </div>
+        
+        <div class="error-message" id="errorMessage">
+            Incorrect password. Please try again.
+        </div>
+        
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="password">Enter Access Password</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Enter your password"
+                    required
+                    autocomplete="off"
+                >
+            </div>
+            
+            <button type="submit" class="login-btn">Access Campaign Review</button>
+        </form>
+        
+        <p class="info-text">
+            If you need the password, please contact Michael McDermott.
+        </p>
+    </div>
+
+    <script>
+        // Simple password protection (for basic security)
+        // Password: review2024
+        const correctPassword = 'review2024';
+        
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            
+            if (password === correctPassword) {
+                // Store access token in sessionStorage
+                sessionStorage.setItem('campaignAccess', 'granted');
+                // Redirect to review page
+                window.location.href = 'campaign-review.html';
+            } else {
+                errorMessage.style.display = 'block';
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+                
+                // Hide error after 3 seconds
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

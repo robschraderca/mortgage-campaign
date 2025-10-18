@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign Review - All Campaigns</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.2em;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .logout-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+        .campaign-section {
+            background: white;
+            margin-bottom: 40px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .campaign-header {
+            background: #667eea;
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .campaign-header h2 {
+            margin: 0;
+            font-size: 1.6em;
+        }
+        .campaign-status {
+            background: white;
+            color: #667eea;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        .campaign-info {
+            padding: 20px 30px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .campaign-info p {
+            margin: 5px 0;
+        }
+        .email-container {
+            padding: 25px 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .email-container:last-of-type {
+            border-bottom: none;
+        }
+        .email-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .email-number {
+            background: #667eea;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        .email-timing {
+            color: #666;
+            font-style: italic;
+            font-size: 0.9em;
+        }
+        .subject {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-weight: bold;
+            color: #333;
+        }
+        .subject span {
+            color: #667eea;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .email-body {
+            margin-top: 20px;
+            white-space: pre-line;
+            color: #444;
+        }
+        .signature {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+            color: #666;
+        }
+        .approval-section {
+            padding: 30px;
+            background: #f8f9fa;
+            border-top: 3px solid #667eea;
+        }
+        .approval-section h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .button-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .approve-btn, .deny-btn {
+            padding: 15px 40px;
+            font-size: 1.1em;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 150px;
+        }
+        .approve-btn {
+            background: #27ae60;
+            color: white;
+        }
+        .approve-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+        }
+        .deny-btn {
+            background: #e74c3c;
+            color: white;
+        }
+        .deny-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+        .approved {
+            background: #d4edda !important;
+            border: 2px solid #27ae60 !important;
+        }
+        .denied {
+            background: #f8d7da !important;
+            border: 2px solid #e74c3c !important;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        .status-approved {
+            background: #27ae60;
+            color: white;
+        }
+        .status-denied {
+            background: #e74c3c;
+            color: white;
+        }
+        .status-pending {
+            background: #f39c12;
+            color: white;
+        }
+        @media (max-width: 768px) {
+            .email-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .button-container {
+                flex-direction: column;
+            }
+            .approve-btn, .deny-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+    
+    <div class="container">
+        <div class="header">
+            <h1>📧 Campaign Review Dashboard</h1>
+            <p>Review and approve email campaigns for Michael McDermott, NMLS #1036304</p>
+        </div>
+
+        <!-- DENTIST CAMPAIGN -->
+        <div class="campaign-section" id="campaign-dentist">
+            <div class="campaign-header">
+                <h2>🦷 Dentist Campaign</h2>
+                <div class="campaign-status status-badge status-pending" id="status-dentist">Pending Review</div>
+            </div>
+            
+            <div class="campaign-info">
+                <p><strong>Target Audience:</strong> Self-Employed Dentists</p>
+                <p><strong>Sequence:</strong> 5 Emails Over 14-21 Days</p>
+                <p><strong>Core Message:</strong> Qualify based on deposits, not tax returns</p>
+            </div>
+
+            <div class="email-container">
+                <div class="email-header">
+                    <div class="email-number">EMAIL 1 - Initial Contact</div>
+                    <div class="email-timing">Sent: Day 0</div>
+                </div>
+                <div class="subject">
+                    <span>Subject:</span>
+                    Dentist denied mortgage despite $400K+ deposits?
+                </div>
+                <div class="email-body">Hi [First Name],
+
+I just helped a dentist close on a $950K home in [City].
+
+Chase told her she only qualified for a $400K mortgage.
+
+The difference? I looked at her actual practice deposits — not her tax returns showing $67K after deductions.
+
+Here's the best part: I never looked at a single withdrawal.
+
+Not the Porsche payment. Not the country club. Not Rome. Nothing.
+
+Traditional mortgage lenders see your W-2 and scrutinize every expense. Meanwhile, you're depositing $30-50K monthly.
+
+Our Bank Statement Mortgage only counts what comes IN — never what goes OUT.
+
+Three dentists closed mortgages with me last month. All qualified for 40-60% more.
+
+Ready to see what mortgage you actually qualify for?
+Just reply with your phone number. I'll call you today.
+(Or simply reply "YES" and we can start the conversation here)</div>
+                <div class="signature">Best,
+Michael McDermott
+NMLS #1036304</div>
+            </div>
+
+            <div class="email-container">
+                <div class="email-header">
+                    <div class="email-number">EMAIL 2 - Follow-Up</div>
+                    <div class="email-timing">Sent: Day 3-4</div>
+                </div>
+                <div class="subject">
+                    <span>Subject:</span>
+                    Forgot to mention: We ignore your expenses completely
+                </div>
+                <div class="email-body">Hi [First Name],
+
+Real quick on that mortgage —
+
+Just ran numbers for another dentist in [City].
+
+Traditional mortgage lender: "Why did you withdraw $30K last March?"
+Him: "None of your business."
+Traditional lender: "Mortgage denied."
+
+My review:
+- Counted his deposits: $380K annually
+- Ignored his withdrawals: 100% of them
+- Mortgage approval: $1.1M
+
+I don't care if you bought a boat, Bitcoin, or a country club membership.
+
+Your withdrawals = Your business.
+Your deposits = Your mortgage qualification.
+
+Want to know what mortgage amount you actually qualify for?
+Just reply with your phone number. I'll call you today.
+(Or simply reply "YES" and we can start the conversation here)
+
+No expense scrutiny. Ever.</div>
+                <div class="signature">Michael</div>
+            </div>
+
+            <div class="email-container">
+                <div class="email-header">
+                    <div class="email-number">EMAIL 3 - Value Story</div>
+                    <div class="email-timing">Sent: Day 7</div>
+                </div>
+                <div class="subject">
+                    <span>Subject:</span>
+                    Approved a mortgage that banks rejected 3 times
+                </div>
+                <div class="email-body">[First Name],
+
+Wells Fargo rejected a dentist's mortgage 3 times.
+
+They kept asking:
+- "What's this $15K withdrawal?"
+
+He walked out. Called me instead.
+
+My mortgage review:
+✓ Counted $500K in deposits
+✗ Ignored every withdrawal
+= Mortgage approved for $925K in 48 hours
+
+I will NEVER ask about your withdrawals when qualifying your mortgage. Ever.
+
+The mortgage process:
+1. Send 12 months of bank statements
+2. I average deposits only
+3. You get a mortgage based on real income
+
+Ready for a mortgage without the interrogation?
+Just reply with your phone number. I'll call you today.
+(Or simply reply "YES" and we can start the conversation here)</div>
+                <div class="signature">Michael</div>
+            </div>
+
+            <div class="email-container">
+                <div class="email-header">
+                    <div class="email-number">EMAIL 4 - Urgency</div>
+                    <div class="email-timing">Sent: Day 10-12</div>
+                </div>
+                <div class="subject">
+                    <span>Subject:</span>
+                    While banks ask 20 questions, we approve mortgages on deposits
+                </div>
+                <div class="email-body">[First Name],
+
+While traditional mortgage lenders are analyzing every withdrawal and expense...
+
+We're taking a different approach — approving mortgages based only on what you deposit each month.
+
+No withdrawal reviews.
+No expense reports.
+No judgment about that $80K car.
+No questions about Rome.
+
+Your deposits tell me everything I need to approve your mortgage.
+
+Look — mortgage rates are still good. Guidelines are flexible. This combo expires soon.
+
+Find out what mortgage you REALLY qualify for:
+Just reply with your phone number. I'll call you today.
+(Or simply reply "YES" and we can start the conversation here)
+
+Already helped 47 dentists get mortgages this year without explaining a single withdrawal. You're probably #48.</div>
+                <div class="signature">Michael</div>
+            </div>
+
+            <div class="email-container">
+                <div class="email-header">
+                    <div class="email-number">EMAIL 5 - Final Email</div>
+                    <div class="email-timing">Sent: Day 14-21</div>
+                </div>
+                <div class="subject">
+                    <span>Subject:</span>
+                    Your spending is your business (not mine)
+                </div>
+                <div class="email-body">[First Name],
+
+Last email, then I'll leave you alone.
+
+Our Bank Statement Mortgage: We count deposits. Ignore withdrawals. Period.
+
+No explaining:
+- Large family transfers
+- Investment purchases
+- Personal expenses of any kind
+
+Not my business. Never will be.
+
+Still interested in seeing what you qualify for without the privacy invasion?
+
+Reply with:
+- Your phone number (I'll call today)
+- "YES" (let's talk)
+- "NO" (I'll delete you)
+
+The withdrawals that disqualify you at traditional banks? They're irrelevant in my underwriting process.
+
+That's the fundamental difference.</div>
+                <div class="signature">Michael</div>
+            </div>
+
+            <div class="approval-section">
+                <h3>Campaign Decision</h3>
+                <div class="button-container">
+                    <button class="approve-btn" onclick="approveCampaign('dentist')">✓ Approve Campaign</button>
+                    <button class="deny-btn" onclick="denyCampaign('dentist')">✗ Deny Campaign</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESTAURANT CAMPAIGN -->
+        <div class="campaign-section" id="campaign-restaurant">
+            <div class="campaign-header">
+                <h2>🍽️ Restaurant Owners Campaign</h2>
+                <div class="campaign-status status-badge status-pending" id="status-restaurant">Pending Review</div>
+            </div>
+            
+            <div class="campaign-info">
+                <p><strong>Target Audience:</strong> Restaurant Owners & Restaurateurs</p>
+                <p><strong>Sequence:</strong> 5 Emails Over 14-21 Days</p>
+                <p><strong>Core Message:</strong> Qualify based on deposits, not tax returns</p>
+            </div>
+
+            <div class="email-container">
+                <div class="email-header">
+                    <div class="email-number">EMAIL 1 - Initial Contact</div>
+                    <div class="email-timing">Sent: Day 0</div>
+                </div>
+                <div class="subject">
+                    <span>Subject:</span>
+                    Restaurant owner denied mortgage despite $400K+ deposits?
+                </div>
+                <div class="email-body">Hi [First Name],
+
+I just helped a restaurant owner close on a $850K home in [City].
+
+Chase told him he only qualified for a $300K mortgage.
+
+The difference? I looked at his actual restaurant deposits — not his tax returns showing $55K after deductions.
+
+Here's the best part: I never looked at a single withdrawal.
+
+Not the food supplier payments. Not the payroll. Not that trip to Italy. Nothing.
+
+Traditional lenders see your W-2 and scrutinize every expense. Meanwhile, you're depositing $35-50K monthly.
+
+Our Bank Statement Mortgage only counts what comes IN — never what goes OUT.
+
+Three restaurant owners closed with me last month. All qualified for 40-60% more.
+
+Ready to see what mortgage you actually qualify for?
+Just reply with your phone number. I'll call you today.
+(Or simply reply "YES" and we can start the conversation here)</div>
+                <div class="signature">Best,
+Michael McDermott
+NMLS #1036304</div>
+            </div>
+
+            <div class="email-container">
+                <div class="email-header">
+                    <div class="email-number">EMAIL 2 - Follow-Up</div>
+                    <div class="email-timing">Sent: Day 3-4</div>
+                </div>
+                <div class="subject">
+                    <span>Subject:</span>
+                    Forgot to mention: We ignore your operating expenses completely
+                </div>
+                <div class="email-body">Hi [First Name],
+
+Real quick on that mortgage —
+
+Just ran numbers for another restaurant owner in [City].
+
+Traditional mortgage lender: "Why did you withdraw $25K for supplies last month?"
+Him: "Running a restaurant."
+Traditional lender: "Mortgage denied."
+
+My review:
+- Counted his deposits: $420K annually
+- Ignored his withdrawals: 100% of them
+- Mortgage approval: $975K
+
+I don't care if you bought new kitchen equipment, paid suppliers, or renovated the dining room.
+
+Your operating expenses = Your business.
+Your deposits = Your mortgage qualification.
+
+Want to know what mortgage amount you actually qualify for?
+Just reply with your phone number. I'll call you today.
+(Or simply reply "YES" and we can start the conversation here)
+
+No expense scrutiny. Ever.</div>
+                <div class="signature">Michael</div>
+            </div>
+
+            <div class="email-container">
+                <div class="email-header">
+                    <div class="email-number">EMAIL 3 - Value Story</div>
+                    <div class="email-timing">Sent: Day 7</div>
+                </div>
+                <div class="subject">
+                    <span>Subject:</span>
+                    Approved a restaurant owner banks rejected 3 times
+                </div>
+                <div class="email-body">[First Name],
+
+Wells Fargo rejected a restaurant owner's mortgage 3 times.
+
+They kept asking:
+- "What's this $20K to food suppliers?"
+
+He walked out. Called me instead.
+
+My mortgage review:
+✓ Counted $450K in deposits
+✗ Ignored every withdrawal
+= Mortgage approved for $875K in 48 hours
+
+I will NEVER ask about your food costs when qualifying your mortgage. Ever.
+
+The mortgage process:
+1. Send 12 months of bank statements
+2. I average deposits only
+3. You get a mortgage based on real income
+
+Ready for a mortgage without the interrogation?
+Just reply with your phone number. I'll call you today.
+(Or simply reply "YES" and we can start the conversation here)</div>
+                <div class="signature">Michael</div>
+            </div>
+
+            <div class="email-container">
+                <div class="email-header">
+                    <div class="email-number">EMAIL 4 - Urgency</div>
+                    <div class="email-timing">Sent: Day 10-12</div>
+                </div>
+                <div class="subject">
+                    <span>Subject:</span>
+                    While banks question every vendor payment, we approve mortgages
+                </div>
+                <div class="email-body">[First Name],
+
+While traditional mortgage lenders are analyzing every supplier invoice...
+
+We're taking a different approach — approving mortgages based only on what you deposit each month.
+
+No expense reviews.
+No questions about food costs.
+No judgment about that $80K kitchen renovation.
+No questions about the restaurant convention.
+
+Your deposits tell me everything I need to approve your mortgage.
+
+Look — mortgage rates are still good. Guidelines are flexible. This combo expires soon.
+
+Find out what mortgage you REALLY qualify for:
+Just reply with your phone number. I'll call you today.
+(Or simply reply "YES" and we can start the conversation here)
+
+Already helped 38 restaurant owners get mortgages this year without explaining a single withdrawal. You're probably #39.</div>
+                <div class="signature">Michael</div>
+            </div>
+
+            <div class="email-container">
+                <div class="email-header">
+                    <div class="email-number">EMAIL 5 - Final Email</div>
+                    <div class="email-timing">Sent: Day 14-21</div>
+                </div>
+                <div class="subject">
+                    <span>Subject:</span>
+                    Your restaurant expenses are your business (not mine)
+                </div>
+                <div class="email-body">[First Name],
+
+Last email, then I'll leave you alone.
+
+Our Bank Statement Mortgage: We count deposits. Ignore withdrawals. Period.
+
+No explaining:
+- Food & beverage costs
+- Payroll expenses
+- Personal expenses of any kind
+
+Not my business. Never will be.
+
+Still interested in seeing what you qualify for without the privacy invasion?
+
+Reply with:
+- Your phone number (I'll call today)
+- "YES" (let's talk)
+- "NO" (I'll delete you)
+
+The operating expenses that disqualify you at traditional banks? They're irrelevant in my underwriting process.
+
+That's the fundamental difference.</div>
+                <div class="signature">Michael</div>
+            </div>
+
+            <div class="approval-section">
+                <h3>Campaign Decision</h3>
+                <div class="button-container">
+                    <button class="approve-btn" onclick="approveCampaign('restaurant')">✓ Approve Campaign</button>
+                    <button class="deny-btn" onclick="denyCampaign('restaurant')">✗ Deny Campaign</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SALON CAMPAIGN -->
+        <div class="campaign-section" id="campaign-salon">
+            <div class="campaign-header">
+                <h2>💇 Salon Owners Campaign</h2>
+                <div class="campaign-status status-badge status-pending" id="status-salon">Pending Review</div>
+            </div>
+            
+            <div class="campaign-info">
+                <p><strong>Target Audience:</strong> Salon Owners & Beauty Professionals</p>
+                <p><strong>Sequence:</strong> 5 Emails Over 14-21 Days</p>
+                <p><strong>Core Message:</strong> Qualify based on deposits, not tax returns</p>
+            </div>
+
+            <div class="email-container">
+                <div class="email-header">
+                    <div class="email-number">EMAIL 1 - Initial Contact</div>
+                    <div class="email-timing">Sent: Day 0</div>
+                </div>
+                <div class="subject">
+                    <span>Subject:</span>
+                    Salon owner denied mortgage despite $300K+ deposits?
+                </div>
+                <div class="email-body">Hi [First Name],
+
+I just helped a salon owner close on a $750K home in [City].
+
+Chase told her she only qualified for a $250K mortgage.
+
+The difference? I looked at her actual salon deposits — not her tax returns showing $45K after deductions.
+
+Here's the best part: I never looked at a single withdrawal.
+
+Not the product inventory. Not the Mercedes payment. Not Vegas for the hair show. Nothing.
+
+Traditional lenders see your W-2 and scrutinize every expense. Meanwhile, you're depositing $25-40K monthly.
+
+Our Bank Statement Mortgage only counts what comes IN — never what goes OUT.
+
+Three salon owners closed with me last month. All qualified for 40-60% more.
+
+Ready to see what mortgage you actually qualify for?
+Just reply with your phone number. I'll call you today.
+(Or simply reply "YES" and we can start the conversation here)</div>
+                <div class="signature">Best,
+Michael McDermott
+NMLS #1036304</div>
+            </div>
+
+            <div class="email-container">
+                <div class="email-header">
+                    <div class="email-number">EMAIL 2 - Follow-Up</div>
+                    <div class="email-timing">Sent: Day 3-4</div>
+                </div>
+                <div class="subject">
+                    <span>Subject:</span>
+                    Forgot to mention: We ignore your business expenses completely
+                </div>
+                <div class="email-body">Hi [First Name],
+
+Real quick on that mortgage —
+
+Just ran numbers for another salon owner in [City].
+
+Traditional mortgage lender: "Why did you withdraw $20K for inventory last month?"
+Her: "Running a business."
+Traditional lender: "Mortgage denied."
+
+My review:
+- Counted her deposits: $280K annually
+- Ignored her withdrawals: 100% of them
+- Mortgage approval: $825K
+
+I don't care if you bought new chairs, inventory, or renovated your salon.
+
+Your business expenses = Your business.
+Your deposits = Your mortgage qualification.
+
+Want to know what mortgage amount you actually qualify for?
+Just reply with your phone number. I'll call you today.
+(Or simply reply "YES" and we can start the conversation here)
+
+No expense scrutiny. Ever.</div>
+                <div class="signature">Michael</div>
+            </div>
+
+            <div class="email-container">
+                <div class="email-header">
+                    <div class="email-number">EMAIL 3 - Value Story</div>
+                    <div class="email-timing">Sent: Day 7</div>
+                </div>
+                <div class="subject">
+                    <span>Subject:</span>
+                    Approved a salon owner banks rejected 3 times
+                </div>
+                <div class="email-body">[First Name],
+
+Wells Fargo rejected a salon owner's mortgage 3 times.
+
+They kept asking:
+- "What's this $12K withdrawal for supplies?"
+
+She walked out. Called me instead.
+
+My mortgage review:
+✓ Counted $380K in deposits
+✗ Ignored every withdrawal
+= Mortgage approved for $725K in 48 hours
+
+I will NEVER ask about your inventory purchases when qualifying your mortgage. Ever.
+
+The mortgage process:
+1. Send 12 months of bank statements
+2. I average deposits only (chair rental, services, retail - all of it)
+3. You get a mortgage based on real income
+
+Ready for a mortgage without the interrogation?
+Just reply with your phone number. I'll call you today.
+(Or simply reply "YES" and we can start the conversation here)</div>
+                <div class="signature">Michael</div>
+            </div>
+
+            <div class="email-container">
+                <div class="email-header">
+                    <div class="email-number">EMAIL 4 - Urgency</div>
+                    <div class="email-timing">Sent: Day 10-12</div>
+                </div>
+                <div class="subject">
+                    <span>Subject:</span>
+                    While banks question every supply order, we approve mortgages
+                </div>
+                <div class="email-body">[First Name],
+
+While traditional mortgage lenders are analyzing every product purchase...
+
+We're taking a different approach — approving mortgages based only on what you deposit each month.
+
+No expense reviews.
+No questions about inventory.
+No judgment about that $60K salon renovation.
+No questions about the hair show in Vegas.
+
+Your deposits from chair rentals, services, and retail tell me everything I need to approve your mortgage.
+
+Look — mortgage rates are still good. Guidelines are flexible. This combo expires soon.
+
+Find out what mortgage you REALLY qualify for:
+Just reply with your phone number. I'll call you today.
+(Or simply reply "YES" and we can start the conversation here)
+
+Already helped 42 salon owners get mortgages this year without explaining a single withdrawal. You're probably #43.</div>
+                <div class="signature">Michael</div>
+            </div>
+
+            <div class="email-container">
+                <div class="email-header">
+                    <div class="email-number">EMAIL 5 - Final Email</div>
+                    <div class="email-timing">Sent: Day 14-21</div>
+                </div>
+                <div class="subject">
+                    <span>Subject:</span>
+                    Your business expenses are your business (not mine)
+                </div>
+                <div class="email-body">[First Name],
+
+Last email, then I'll leave you alone.
+
+Our Bank Statement Mortgage: We count deposits. Ignore withdrawals. Period.
+
+No explaining:
+- Product inventory
+- Chair rental payments
+- Personal expenses of any kind
+
+Not my business. Never will be.
+
+Still interested in seeing what you qualify for without the privacy invasion?
+
+Reply with:
+- Your phone number (I'll call today)
+- "YES" (let's talk)
+- "NO" (I'll delete you)
+
+The inventory purchases that disqualify you at traditional banks? They're irrelevant in my underwriting process.
+
+That's the fundamental difference.</div>
+                <div class="signature">Michael</div>
+            </div>
+
+            <div class="approval-section">
+                <h3>Campaign Decision</h3>
+                <div class="button-container">
+                    <button class="approve-btn" onclick="approveCampaign('salon')">✓ Approve Campaign</button>
+                    <button class="deny-btn" onclick="denyCampaign('salon')">✗ Deny Campaign</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Check if user is logged in
+        if (sessionStorage.getItem('campaignAccess') !== 'granted') {
+            window.location.href = 'client-login.html';
+        }
+
+        // Load saved decisions from localStorage
+        function loadDecisions() {
+            const campaigns = ['dentist', 'restaurant', 'salon'];
+            campaigns.forEach(campaign => {
+                const decision = localStorage.getItem(`campaign-${campaign}`);
+                if (decision) {
+                    updateCampaignStatus(campaign, decision);
+                }
+            });
+        }
+
+        function approveCampaign(campaign) {
+            if (confirm(`Are you sure you want to APPROVE the ${campaign} campaign?`)) {
+                localStorage.setItem(`campaign-${campaign}`, 'approved');
+                updateCampaignStatus(campaign, 'approved');
+                alert(`✓ ${campaign.charAt(0).toUpperCase() + campaign.slice(1)} campaign has been APPROVED!`);
+            }
+        }
+
+        function denyCampaign(campaign) {
+            if (confirm(`Are you sure you want to DENY the ${campaign} campaign?`)) {
+                localStorage.setItem(`campaign-${campaign}`, 'denied');
+                updateCampaignStatus(campaign, 'denied');
+                alert(`✗ ${campaign.charAt(0).toUpperCase() + campaign.slice(1)} campaign has been DENIED.`);
+            }
+        }
+
+        function updateCampaignStatus(campaign, status) {
+            const section = document.getElementById(`campaign-${campaign}`);
+            const statusBadge = document.getElementById(`status-${campaign}`);
+            
+            // Remove existing status classes
+            section.classList.remove('approved', 'denied');
+            statusBadge.classList.remove('status-approved', 'status-denied', 'status-pending');
+            
+            if (status === 'approved') {
+                section.classList.add('approved');
+                statusBadge.classList.add('status-approved');
+                statusBadge.textContent = '✓ Approved';
+            } else if (status === 'denied') {
+                section.classList.add('denied');
+                statusBadge.classList.add('status-denied');
+                statusBadge.textContent = '✗ Denied';
+            } else {
+                statusBadge.classList.add('status-pending');
+                statusBadge.textContent = 'Pending Review';
+            }
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                sessionStorage.removeItem('campaignAccess');
+                window.location.href = 'client-login.html';
+            }
+        }
+
+        // Load decisions on page load
+        loadDecisions();
+    </script>
+</body>
+</html>
