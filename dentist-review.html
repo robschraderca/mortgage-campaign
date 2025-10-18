@@ -1277,7 +1277,8 @@ That's the fundamental difference.</textarea>
         function unapprovedCampaign() {
             if (confirm('Are you sure you want to UNAPPROVE the Dentist campaign? This will reset it to pending status.')) {
                 localStorage.removeItem(`campaign-${campaignName}`);
-                loadDecision();
+                const statusDiv = document.getElementById('decision-status');
+                statusDiv.innerHTML = ''; // Clear the status badge
                 alert('↺ Dentist campaign has been reset to PENDING status.');
             }
         }
