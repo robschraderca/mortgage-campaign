@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dentist Campaign Review</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+            border-right: 1px solid #334155;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 100;
+        }
+        
+        .sidebar-header {
+            padding: 30px 25px;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .sidebar-title {
+            font-size: 1.4em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-subtitle {
+            font-size: 0.85em;
+            color: #94a3b8;
+            font-weight: 400;
+        }
+        
+        .sidebar-nav {
+            flex: 1;
+            padding: 20px 0;
+            overflow-y: auto;
+        }
+        
+        .nav-item {
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        
+        .nav-item:hover {
+            background: rgba(100, 116, 139, 0.1);
+            border-left-color: #667eea;
+        }
+        
+        .nav-item.active {
+            background: rgba(102, 126, 234, 0.15);
+            border-left-color: #667eea;
+        }
+        
+        .nav-icon {
+            font-size: 1.5em;
+            width: 35px;
+            text-align: center;
+        }
+        
+        .nav-text {
+            flex: 1;
+        }
+        
+        .nav-title {
+            font-weight: 600;
+            font-size: 0.95em;
+            color: #f1f5f9;
+        }
+        
+        .nav-subtitle {
+            font-size: 0.75em;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+        
+        .sidebar-footer {
+            padding: 20px 25px;
+            border-top: 1px solid #334155;
+        }
+        
+        .back-btn {
+            width: 100%;
+            padding: 12px;
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 8px;
+            color: #667eea;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        
+        .back-btn:hover {
+            background: rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+        
+        .logout-btn {
+            width: 100%;
+            padding: 12px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 8px;
+            color: #f87171;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #f87171;
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 40px 50px;
+            width: calc(100% - 280px);
+        }
+        
+        .content-header {
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-left {
+            flex: 1;
+        }
+        
+        .content-title {
+            font-size: 2.5em;
+            font-weight: 800;
+            color: #f1f5f9;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .campaign-icon-header {
+            font-size: 1.2em;
+        }
+        
+        .content-subtitle {
+            font-size: 1.1em;
+            color: #94a3b8;
+            font-weight: 400;
+        }
+        
+        .campaign-status-badge {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 0.9em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-approved {
+            background: rgba(72, 187, 120, 0.2);
+            color: #48bb78;
+            border: 2px solid rgba(72, 187, 120, 0.4);
+        }
+        
+        .status-denied {
+            background: rgba(245, 101, 101, 0.2);
+            color: #f56565;
+            border: 2px solid rgba(245, 101, 101, 0.4);
+        }
+        
+        .status-pending {
+            background: rgba(203, 213, 225, 0.2);
+            color: #cbd5e0;
+            border: 2px solid rgba(203, 213, 225, 0.4);
+        }
+        
+        /* Campaign Overview */
+        .campaign-overview {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+        
+        .overview-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(100, 116, 139, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(100, 116, 139, 0.2);
+        }
+        
+        .overview-label {
+            font-size: 0.8em;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        
+        .overview-value {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+        
+        /* Email Cards */
+        .emails-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .email-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .email-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
+        }
+        
+        .email-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .email-number {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+        
+        .email-timing {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+        
+        .email-content {
+            padding: 35px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .section-label {
+            color: #667eea;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        
+        .edit-hint {
+            color: #64748b;
+            font-size: 0.8em;
+            font-style: italic;
+        }
+        
+        .subject-display, .subject-input {
+            background: rgba(100, 116, 139, 0.1);
+            padding: 18px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1em;
+            color: #f1f5f9;
+            border: 1px solid rgba(100, 116, 139, 0.2);
+            margin-bottom: 25px;
+        }
+        
+        .subject-input {
+            width: 100%;
+            background: rgba(102, 126, 234, 0.1);
+            border: 2px solid #667eea;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+        
+        .subject-input:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+        
+        .body-display, .body-textarea {
+            background: rgba(100, 116, 139, 0.1);
+            padding: 25px;
+            border-radius: 12px;
+            white-space: pre-line;
+            line-height: 1.8;
+            color: #e2e8f0;
+            min-height: 300px;
+            border: 1px solid rgba(100, 116, 139, 0.2);
+            margin-bottom: 25px;
+        }
+        
+        .body-textarea {
+            width: 100%;
+            background: rgba(102, 126, 234, 0.1);
+            border: 2px solid #667eea;
+            font-family: inherit;
+            font-size: 1em;
+            resize: vertical;
+            transition: all 0.3s;
+        }
+        
+        .body-textarea:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+        
+        .signature {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px solid #334155;
+            color: #94a3b8;
+            font-style: italic;
+            white-space: pre-line;
+        }
+        
+        /* Comments Section */
+        .comments-section {
+            background: rgba(237, 137, 54, 0.1);
+            border: 2px solid rgba(237, 137, 54, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 25px;
+        }
+        
+        .comments-label {
+            color: #ed8936;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .comments-textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            background: rgba(15, 23, 42, 0.5);
+            border: 2px solid rgba(237, 137, 54, 0.3);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.95em;
+            line-height: 1.6;
+            resize: vertical;
+            color: #e2e8f0;
+            transition: all 0.3s;
+            margin-bottom: 12px;
+        }
+        
+        .comments-textarea:focus {
+            outline: none;
+            border-color: #ed8936;
+            box-shadow: 0 0 0 3px rgba(237, 137, 54, 0.2);
+        }
+        
+        .comments-textarea::placeholder {
+            color: #64748b;
+        }
+        
+        /* Buttons */
+        .edit-controls {
+            margin-top: 25px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding-top: 25px;
+            border-top: 2px solid #334155;
+        }
+        
+        .btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .btn-edit {
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+            color: white;
+        }
+        
+        .btn-save {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+        }
+        
+        .btn-undo {
+            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+            color: white;
+        }
+        
+        .btn-cancel {
+            background: linear-gradient(135deg, #718096 0%, #4a5568 100%);
+            color: white;
+        }
+        
+        .btn-approve-email, .btn-deny-email {
+            padding: 10px 24px;
+            border: 2px solid;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85em;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        
+        .btn-approve-email {
+            background: rgba(72, 187, 120, 0.1);
+            color: #48bb78;
+            border-color: rgba(72, 187, 120, 0.4);
+        }
+        
+        .btn-approve-email:hover, .btn-approve-email.approved {
+            background: #48bb78;
+            color: #0f172a;
+            border-color: #48bb78;
+        }
+        
+        .btn-deny-email {
+            background: rgba(245, 101, 101, 0.1);
+            color: #f56565;
+            border-color: rgba(245, 101, 101, 0.4);
+        }
+        
+        .btn-deny-email:hover, .btn-deny-email.denied {
+            background: #f56565;
+            color: #0f172a;
+            border-color: #f56565;
+        }
+        
+        .btn-submit-comment {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-submit-comment:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(237, 137, 54, 0.4);
+        }
+        
+        .comments-saved {
+            display: inline-block;
+            margin-left: 10px;
+            color: #48bb78;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        
+        /* Approval Section */
+        .approval-section {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+            padding: 50px 40px;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .approval-section h3 {
+            color: #f1f5f9;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .approval-section-subtitle {
+            color: #94a3b8;
+            font-size: 1em;
+            margin-bottom: 35px;
+        }
+        
+        .approval-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-approve, .btn-deny, .btn-unapprove {
+            padding: 16px 40px;
+            font-size: 1em;
+            font-weight: 600;
+            border: 2px solid;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 180px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-approve {
+            background: rgba(72, 187, 120, 0.1);
+            color: #48bb78;
+            border-color: rgba(72, 187, 120, 0.4);
+        }
+        
+        .btn-approve:hover {
+            background: #48bb78;
+            color: #0f172a;
+            border-color: #48bb78;
+            box-shadow: 0 8px 20px rgba(72, 187, 120, 0.3);
+        }
+        
+        .btn-deny {
+            background: rgba(245, 101, 101, 0.1);
+            color: #f56565;
+            border-color: rgba(245, 101, 101, 0.4);
+        }
+        
+        .btn-deny:hover {
+            background: #f56565;
+            color: #0f172a;
+            border-color: #f56565;
+            box-shadow: 0 8px 20px rgba(245, 101, 101, 0.3);
+        }
+        
+        .btn-unapprove {
+            background: rgba(203, 213, 225, 0.1);
+            color: #cbd5e0;
+            border-color: rgba(203, 213, 225, 0.4);
+        }
+        
+        .btn-unapprove:hover {
+            background: #cbd5e0;
+            color: #0f172a;
+            border-color: #cbd5e0;
+            box-shadow: 0 8px 20px rgba(203, 213, 225, 0.3);
+        }
+        
+        .saved-indicator {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(72, 187, 120, 0.3);
+            z-index: 1001;
+            animation: slideInRight 0.3s;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .edit-mode {
+            border-color: #ed8936 !important;
+            box-shadow: 0 0 0 3px rgba(237, 137, 54, 0.2) !important;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 20px;
+            }
+            
+            .content-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            
+            .email-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">Campaign Hub</div>
+                <div class="sidebar-subtitle">Dentist Campaign</div>
+            </div>
+            
+            <div class="sidebar-nav">
+                <div class="nav-item" onclick="window.location.href='campaign-review-menu.html'">
+                    <div class="nav-icon">📊</div>
+                    <div class="nav-text">
+                        <div class="nav-title">All Campaigns</div>
+                        <div class="nav-subtitle">Dashboard</div>
+                    </div>
+                </div>
+                
+                <div class="nav-item active">
+                    <div class="nav-icon">🦷</div>
+                    <div class="nav-text">
+                        <div class="nav-title">Dentist</div>
+                        <div class="nav-subtitle">Current Campaign</div>
+                    </div>
+                </div>
+                
+                <div class="nav-item" onclick="window.location.href='restaurant-review.html'">
+                    <div class="nav-icon">🍽️</div>
+                    <div class="nav-text">
+                        <div class="nav-title">Restaurant</div>
+                        <div class="nav-subtitle">Switch Campaign</div>
+                    </div>
+                </div>
+                
+                <div class="nav-item" onclick="window.location.href='salon-review.html'">
+                    <div class="nav-icon">💇</div>
+                    <div class="nav-text">
+                        <div class="nav-title">Salon</div>
+                        <div class="nav-subtitle">Switch Campaign</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-footer">
+                <button class="back-btn" onclick="window.location.href='campaign-review-menu.html'">← Back to Dashboard</button>
+                <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="content-header">
+                <div class="header-left">
+                    <div class="content-title">
+                        <span class="campaign-icon-header">🦷</span>
+                        Dentist Campaign
+                    </div>
+                    <div class="content-subtitle">Bank Statement Mortgage Program for Self-Employed Dentists</div>
+                </div>
+                <div class="campaign-status-badge status-pending" id="campaign-status">Pending</div>
+            </div>
+            
+            <div class="campaign-overview">
+                <div class="overview-grid">
+                    <div class="overview-item">
+                        <div class="overview-label">Target Audience</div>
+                        <div class="overview-value">Dentists</div>
+                    </div>
+                    <div class="overview-item">
+                        <div class="overview-label">Email Sequence</div>
+                        <div class="overview-value">5 Emails</div>
+                    </div>
+                    <div class="overview-item">
+                        <div class="overview-label">Duration</div>
+                        <div class="overview-value">14-21 Days</div>
+                    </div>
+                    <div class="overview-item">
+                        <div class="overview-label">Loan Officer</div>
+                        <div class="overview-value">Michael M.</div>
+                    </div>
+                </div>
+            </div>
