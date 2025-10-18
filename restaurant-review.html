@@ -638,52 +638,14 @@
     
 
 
-        
-        /* PDF Export Button - Inline with Header */
-        .content-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        
-        .header-left {
-            flex: 1;
-        }
-        
+        /* Export and Copy Buttons */
         .header-actions {
             display: flex;
             gap: 15px;
             align-items: center;
+            flex-wrap: wrap;
         }
         
-        .btn-export-pdf-header {
-            padding: 12px 28px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            border-radius: 10px;
-            color: white;
-            font-weight: 600;
-            font-size: 0.95em;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-            white-space: nowrap;
-        }
-        
-        .btn-export-pdf-header:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-        }
-        
-
         .btn-copy-emails {
             padding: 12px 28px;
             background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
@@ -711,86 +673,1085 @@
         .btn-copy-emails.copied {
             background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
         }
-
-        .btn-export-pdf-header:active {
-            transform: translateY(0);
+        
+        .btn-export-pdf-header {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            white-space: nowrap;
         }
         
-        .pdf-export-section {
-            display: none;
+        .btn-export-pdf-header:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* DARK THEME OVERLAY */
+/* Dark Theme Overlay for Campaign Review Pages */
+body {
+    background: #0f172a !important;
+    color: #e2e8f0 !important;
+}
+
+.header {
+    background: transparent !important;
+    color: #f1f5f9 !important;
+    border-bottom: 1px solid #334155 !important;
+    box-shadow: none !important;
+}
+
+.header h1 {
+    color: #f1f5f9 !important;
+}
+
+.header p {
+    color: #94a3b8 !important;
+}
+
+.campaign-info {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+    border: 1px solid #334155 !important;
+}
+
+.campaign-info h3 {
+    color: #667eea !important;
+}
+
+.info-item {
+    background: rgba(100, 116, 139, 0.1) !important;
+    border: 1px solid rgba(100, 116, 139, 0.2) !important;
+    color: #f1f5f9 !important;
+}
+
+.email-card {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+    border: 1px solid #334155 !important;
+}
+
+.email-card:hover {
+    border-color: #667eea !important;
+    box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2) !important;
+}
+
+.subject-display {
+    background: rgba(100, 116, 139, 0.1) !important;
+    border: 1px solid rgba(100, 116, 139, 0.2) !important;
+    color: #f1f5f9 !important;
+}
+
+.subject-input {
+    background: rgba(102, 126, 234, 0.1) !important;
+    border: 2px solid #667eea !important;
+    color: #f1f5f9 !important;
+}
+
+.email-body-display {
+    background: rgba(100, 116, 139, 0.1) !important;
+    border: 1px solid rgba(100, 116, 139, 0.2) !important;
+    color: #e2e8f0 !important;
+}
+
+.email-body-textarea {
+    background: rgba(102, 126, 234, 0.1) !important;
+    border: 2px solid #667eea !important;
+    color: #e2e8f0 !important;
+}
+
+.signature {
+    border-top-color: #334155 !important;
+    color: #94a3b8 !important;
+}
+
+.comments-section {
+    background: rgba(237, 137, 54, 0.1) !important;
+    border: 2px solid rgba(237, 137, 54, 0.3) !important;
+}
+
+.comments-textarea {
+    background: rgba(15, 23, 42, 0.5) !important;
+    border-color: rgba(237, 137, 54, 0.3) !important;
+    color: #e2e8f0 !important;
+}
+
+.comments-textarea::placeholder {
+    color: #64748b !important;
+}
+
+.edit-controls {
+    border-top-color: #334155 !important;
+}
+
+.btn-approve-email {
+    background: rgba(72, 187, 120, 0.1) !important;
+    color: #48bb78 !important;
+    border-color: rgba(72, 187, 120, 0.4) !important;
+}
+
+.btn-approve-email:hover, .btn-approve-email.approved {
+    background: #48bb78 !important;
+    color: #0f172a !important;
+}
+
+.btn-deny-email {
+    background: rgba(245, 101, 101, 0.1) !important;
+    color: #f56565 !important;
+    border-color: rgba(245, 101, 101, 0.4) !important;
+}
+
+.btn-deny-email:hover, .btn-deny-email.denied {
+    background: #f56565 !important;
+    color: #0f172a !important;
+}
+
+.approval-section {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+    border: 1px solid #334155 !important;
+}
+
+.approval-section h3 {
+    color: #f1f5f9 !important;
+}
+
+.approval-section-subtitle {
+    color: #94a3b8 !important;
+}
+
+.btn-approve {
+    background: rgba(72, 187, 120, 0.1) !important;
+    color: #48bb78 !important;
+    border-color: rgba(72, 187, 120, 0.4) !important;
+}
+
+.btn-approve:hover {
+    background: #48bb78 !important;
+    color: #0f172a !important;
+}
+
+.btn-deny {
+    background: rgba(245, 101, 101, 0.1) !important;
+    color: #f56565 !important;
+    border-color: rgba(245, 101, 101, 0.4) !important;
+}
+
+.btn-deny:hover {
+    background: #f56565 !important;
+    color: #0f172a !important;
+}
+
+.btn-unapprove {
+    background: rgba(203, 213, 225, 0.1) !important;
+    color: #cbd5e0 !important;
+    border-color: rgba(203, 213, 225, 0.4) !important;
+}
+
+.btn-unapprove:hover {
+    background: #cbd5e0 !important;
+    color: #0f172a !important;
+}
+
+.nav-buttons {
+    background: rgba(102, 126, 234, 0.1) !important;
+    border: 1px solid rgba(102, 126, 234, 0.3) !important;
+}
+
+.nav-btn {
+    background: rgba(102, 126, 234, 0.1) !important;
+    color: #667eea !important;
+    border-color: rgba(102, 126, 234, 0.3) !important;
+}
+
+.nav-btn:hover {
+    background: #667eea !important;
+    color: #0f172a !important;
+}
+
+    </style>
+</head>
+<body>
+    <div class="nav-buttons">
+        <button class="nav-btn" onclick="window.location.href='campaign-review-menu.html'">← All Campaigns</button>
+        <button class="nav-btn" onclick="logout()">Logout</button>
+    </div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1>🍽️ Restaurant Campaign Review</h1>
+                <p>Bank Statement Mortgage Program for Restaurant Owners</p>
+            </div>
+        </div>
+
+        <div class="campaign-info">
+            <h3>Campaign Overview</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>Target Audience</strong>
+                    <div>Restaurant Owners & Restaurateurs</div>
+                </div>
+                <div class="info-item">
+                    <strong>Email Sequence</strong>
+                    <div>5 Emails Over 14-21 Days</div>
+                </div>
+                <div class="info-item">
+                    <strong>Core Message</strong>
+                    <div>Qualify based on deposits, not tax returns</div>
+                </div>
+                <div class="info-item">
+                    <strong>Loan Officer</strong>
+                    <div>Michael McDermott, NMLS #1036304</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EMAIL 1 -->
+        <div class="email-card" id="email-1">
+            <div class="email-header">
+                <div class="email-number">EMAIL 1 - Initial Contact</div>
+                <div class="email-timing">Day 0</div>
+            </div>
+            <div class="email-content">
+                <div class="subject-section">
+                    <div class="section-header">
+                        <span class="subject-label">Subject Line</span>
+                        <span class="edit-label">← Edit Subject</span>
+                    </div>
+                    <div class="subject-display" id="subject-1-display">Restaurant owner denied mortgage despite $400K+ deposits?</div>
+                    <input type="text" class="subject-input" id="subject-1-input" style="display:none;" value="Restaurant owner denied mortgage despite $400K+ deposits?">
+                </div>
+                
+                <div class="body-section">
+                    <div class="section-header">
+                        <span class="body-label">Email Body</span>
+                        <span class="edit-label">← Edit Body Copy</span>
+                    </div>
+                    <div class="email-body-display" id="body-1-display">Hi [First Name],
+
+I just helped a restaurant owner close on a $850K home in [City].
+
+Chase told him he only qualified for a $300K mortgage.
+
+The difference? I looked at his actual restaurant deposits — not his tax returns showing $55K after deductions.
+
+Here's the best part: I never looked at a single withdrawal.
+
+Not the food supplier payments. Not the payroll. Not that trip to Italy. Nothing.
+
+Traditional lenders see your W-2 and scrutinize every expense. Meanwhile, you're depositing $35-50K monthly.
+
+Our Bank Statement Mortgage only counts what comes IN — never what goes OUT.
+
+Three restaurant owners closed with me last month. All qualified for 40-60% more.
+
+Ready to see what mortgage you actually qualify for?
+Just reply with your phone number. I'll call you today.
+(Or simply reply "YES" and we can start the conversation here)
+
+Thanks,
+Michael</div>
+                    <textarea class="email-body-textarea" id="body-1-input" style="display:none;">Hi [First Name],
+
+I just helped a restaurant owner close on a $850K home in [City].
+
+Chase told him he only qualified for a $300K mortgage.
+
+The difference? I looked at his actual restaurant deposits — not his tax returns showing $55K after deductions.
+
+Here's the best part: I never looked at a single withdrawal.
+
+Not the food supplier payments. Not the payroll. Not that trip to Italy. Nothing.
+
+Traditional lenders see your W-2 and scrutinize every expense. Meanwhile, you're depositing $35-50K monthly.
+
+Our Bank Statement Mortgage only counts what comes IN — never what goes OUT.
+
+Three restaurant owners closed with me last month. All qualified for 40-60% more.
+
+Ready to see what mortgage you actually qualify for?
+Just reply with your phone number. I'll call you today.
+(Or simply reply "YES" and we can start the conversation here)
+
+Thanks,
+Michael</textarea>
+                </div>
+                
+                <div class="signature">Thanks,
+Michael</div>
+
+                <div class="comments-section">
+                    <div class="comments-label">💬 Comments & Feedback</div>
+                    <textarea class="comments-textarea" id="comments-1-input" placeholder="Add your comments, suggestions, or feedback here..."></textarea>
+                    <button class="btn-submit-comment" onclick="submitComment(1)">💾 Submit Comment</button>
+                    <span class="comments-saved" id="comments-saved-1" style="display:none;">✓ Comment Saved</span>
+                </div>
+
+                <div class="edit-controls">
+                    <button class="btn btn-edit" onclick="editEmail(1)">✏️ Edit Email</button>
+                    <button class="btn btn-save" onclick="saveEmail(1)" style="display:none;">💾 Save Changes</button>
+                    <button class="btn btn-undo" onclick="undoEmail(1)" style="display:none;">↩️ Restore Original</button>
+                    <button class="btn btn-cancel" onclick="cancelEdit(1)" style="display:none;">✖️ Cancel</button>
+                    <button class="btn-approve-email" id="approve-email-1" onclick="approveEmail(1)">✓ Approve</button>
+                    <button class="btn-deny-email" id="deny-email-1" onclick="denyEmail(1)">✗ Deny</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- EMAIL 2 -->
+        <div class="email-card" id="email-2">
+            <div class="email-header">
+                <div class="email-number">EMAIL 2 - Follow-Up</div>
+                <div class="email-timing">Day 3-4</div>
+            </div>
+            <div class="email-content">
+                <div class="subject-section">
+                    <div class="section-header">
+                        <span class="subject-label">Subject Line</span>
+                        <span class="edit-label">← Edit Subject</span>
+                    </div>
+                    <div class="subject-display" id="subject-2-display">Forgot to mention: We ignore your operating expenses completely</div>
+                    <input type="text" class="subject-input" id="subject-2-input" style="display:none;" value="Forgot to mention: We ignore your operating expenses completely">
+                </div>
+                
+                <div class="body-section">
+                    <div class="section-header">
+                        <span class="body-label">Email Body</span>
+                        <span class="edit-label">← Edit Body Copy</span>
+                    </div>
+                    <div class="email-body-display" id="body-2-display">Hi [First Name],
+
+Real quick on that mortgage —
+
+Just ran numbers for another restaurant owner in [City].
+
+Traditional mortgage lender: "Why did you withdraw $25K for supplies last month?"
+Him: "Running a restaurant."
+Traditional lender: "Mortgage denied."
+
+My review:
+- Counted his deposits: $420K annually
+- Ignored his withdrawals: 100% of them
+- Mortgage approval: $975K
+
+I don't care if you bought new kitchen equipment, paid suppliers, or renovated the dining room.
+
+Your operating expenses = Your business.
+Your deposits = Your mortgage qualification.
+
+Want to know what mortgage amount you actually qualify for?
+Just reply with your phone number. I'll call you today.
+(Or simply reply "YES" and we can start the conversation here)
+
+No expense scrutiny. Ever.</div>
+                    <textarea class="email-body-textarea" id="body-2-input" style="display:none;">Hi [First Name],
+
+Real quick on that mortgage —
+
+Just ran numbers for another restaurant owner in [City].
+
+Traditional mortgage lender: "Why did you withdraw $25K for supplies last month?"
+Him: "Running a restaurant."
+Traditional lender: "Mortgage denied."
+
+My review:
+- Counted his deposits: $420K annually
+- Ignored his withdrawals: 100% of them
+- Mortgage approval: $975K
+
+I don't care if you bought new kitchen equipment, paid suppliers, or renovated the dining room.
+
+Your operating expenses = Your business.
+Your deposits = Your mortgage qualification.
+
+Want to know what mortgage amount you actually qualify for?
+Just reply with your phone number. I'll call you today.
+(Or simply reply "YES" and we can start the conversation here)
+
+No expense scrutiny. Ever.</textarea>
+                </div>
+                
+                <div class="signature">Michael</div>
+
+                <div class="comments-section">
+                    <div class="comments-label">💬 Comments & Feedback</div>
+                    <textarea class="comments-textarea" id="comments-2-input" placeholder="Add your comments, suggestions, or feedback here..."></textarea>
+                    <button class="btn-submit-comment" onclick="submitComment(2)">💾 Submit Comment</button>
+                    <span class="comments-saved" id="comments-saved-2" style="display:none;">✓ Comment Saved</span>
+                </div>
+
+                <div class="edit-controls">
+                    <button class="btn btn-edit" onclick="editEmail(2)">✏️ Edit Email</button>
+                    <button class="btn btn-save" onclick="saveEmail(2)" style="display:none;">💾 Save Changes</button>
+                    <button class="btn btn-undo" onclick="undoEmail(2)" style="display:none;">↩️ Restore Original</button>
+                    <button class="btn btn-cancel" onclick="cancelEdit(2)" style="display:none;">✖️ Cancel</button>
+                    <button class="btn-approve-email" id="approve-email-2" onclick="approveEmail(2)">✓ Approve</button>
+                    <button class="btn-deny-email" id="deny-email-2" onclick="denyEmail(2)">✗ Deny</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- EMAIL 3 -->
+        <div class="email-card" id="email-3">
+            <div class="email-header">
+                <div class="email-number">EMAIL 3 - Value Story</div>
+                <div class="email-timing">Day 7</div>
+            </div>
+            <div class="email-content">
+                <div class="subject-section">
+                    <div class="section-header">
+                        <span class="subject-label">Subject Line</span>
+                        <span class="edit-label">← Edit Subject</span>
+                    </div>
+                    <div class="subject-display" id="subject-3-display">Approved a restaurant owner banks rejected 3 times</div>
+                    <input type="text" class="subject-input" id="subject-3-input" style="display:none;" value="Approved a restaurant owner banks rejected 3 times">
+                </div>
+                
+                <div class="body-section">
+                    <div class="section-header">
+                        <span class="body-label">Email Body</span>
+                        <span class="edit-label">← Edit Body Copy</span>
+                    </div>
+                    <div class="email-body-display" id="body-3-display">[First Name],
+
+Wells Fargo rejected a restaurant owner's mortgage 3 times.
+
+They kept asking:
+- "What's this $20K to food suppliers?"
+
+He walked out. Called me instead.
+
+My mortgage review:
+✓ Counted $450K in deposits
+✗ Ignored every withdrawal
+= Mortgage approved for $875K in 48 hours
+
+I will NEVER ask about your food costs when qualifying your mortgage. Ever.
+
+The mortgage process:
+1. Send 12 months of bank statements
+2. I average deposits only
+3. You get a mortgage based on real income
+
+Ready for a mortgage without the interrogation?
+Just reply with your phone number. I'll call you today.
+(Or simply reply "YES" and we can start the conversation here)</div>
+                    <textarea class="email-body-textarea" id="body-3-input" style="display:none;">[First Name],
+
+Wells Fargo rejected a restaurant owner's mortgage 3 times.
+
+They kept asking:
+- "What's this $20K to food suppliers?"
+
+He walked out. Called me instead.
+
+My mortgage review:
+✓ Counted $450K in deposits
+✗ Ignored every withdrawal
+= Mortgage approved for $875K in 48 hours
+
+I will NEVER ask about your food costs when qualifying your mortgage. Ever.
+
+The mortgage process:
+1. Send 12 months of bank statements
+2. I average deposits only
+3. You get a mortgage based on real income
+
+Ready for a mortgage without the interrogation?
+Just reply with your phone number. I'll call you today.
+(Or simply reply "YES" and we can start the conversation here)</textarea>
+                </div>
+                
+                <div class="signature">Michael</div>
+
+                <div class="comments-section">
+                    <div class="comments-label">💬 Comments & Feedback</div>
+                    <textarea class="comments-textarea" id="comments-3-input" placeholder="Add your comments, suggestions, or feedback here..."></textarea>
+                    <button class="btn-submit-comment" onclick="submitComment(3)">💾 Submit Comment</button>
+                    <span class="comments-saved" id="comments-saved-3" style="display:none;">✓ Comment Saved</span>
+                </div>
+
+                <div class="edit-controls">
+                    <button class="btn btn-edit" onclick="editEmail(3)">✏️ Edit Email</button>
+                    <button class="btn btn-save" onclick="saveEmail(3)" style="display:none;">💾 Save Changes</button>
+                    <button class="btn btn-undo" onclick="undoEmail(3)" style="display:none;">↩️ Restore Original</button>
+                    <button class="btn btn-cancel" onclick="cancelEdit(3)" style="display:none;">✖️ Cancel</button>
+                    <button class="btn-approve-email" id="approve-email-3" onclick="approveEmail(3)">✓ Approve</button>
+                    <button class="btn-deny-email" id="deny-email-3" onclick="denyEmail(3)">✗ Deny</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- EMAIL 4 -->
+        <div class="email-card" id="email-4">
+            <div class="email-header">
+                <div class="email-number">EMAIL 4 - Urgency</div>
+                <div class="email-timing">Day 10-12</div>
+            </div>
+            <div class="email-content">
+                <div class="subject-section">
+                    <div class="section-header">
+                        <span class="subject-label">Subject Line</span>
+                        <span class="edit-label">← Edit Subject</span>
+                    </div>
+                    <div class="subject-display" id="subject-4-display">While banks question every vendor payment, we approve mortgages</div>
+                    <input type="text" class="subject-input" id="subject-4-input" style="display:none;" value="While banks question every vendor payment, we approve mortgages">
+                </div>
+                
+                <div class="body-section">
+                    <div class="section-header">
+                        <span class="body-label">Email Body</span>
+                        <span class="edit-label">← Edit Body Copy</span>
+                    </div>
+                    <div class="email-body-display" id="body-4-display">[First Name],
+
+While traditional mortgage lenders are analyzing every supplier invoice...
+
+We're taking a different approach — approving mortgages based only on what you deposit each month.
+
+No expense reviews.
+No questions about food costs.
+No judgment about that $80K kitchen renovation.
+No questions about the restaurant convention.
+
+Your deposits tell me everything I need to approve your mortgage.
+
+Look — mortgage rates are still good. Guidelines are flexible. This combo expires soon.
+
+Find out what mortgage you REALLY qualify for:
+Just reply with your phone number. I'll call you today.
+(Or simply reply "YES" and we can start the conversation here)
+
+Already helped 38 restaurant owners get mortgages this year without explaining a single withdrawal. You're probably #39.</div>
+                    <textarea class="email-body-textarea" id="body-4-input" style="display:none;">[First Name],
+
+While traditional mortgage lenders are analyzing every supplier invoice...
+
+We're taking a different approach — approving mortgages based only on what you deposit each month.
+
+No expense reviews.
+No questions about food costs.
+No judgment about that $80K kitchen renovation.
+No questions about the restaurant convention.
+
+Your deposits tell me everything I need to approve your mortgage.
+
+Look — mortgage rates are still good. Guidelines are flexible. This combo expires soon.
+
+Find out what mortgage you REALLY qualify for:
+Just reply with your phone number. I'll call you today.
+(Or simply reply "YES" and we can start the conversation here)
+
+Already helped 38 restaurant owners get mortgages this year without explaining a single withdrawal. You're probably #39.</textarea>
+                </div>
+                
+                <div class="signature">Michael</div>
+
+                <div class="comments-section">
+                    <div class="comments-label">💬 Comments & Feedback</div>
+                    <textarea class="comments-textarea" id="comments-4-input" placeholder="Add your comments, suggestions, or feedback here..."></textarea>
+                    <button class="btn-submit-comment" onclick="submitComment(4)">💾 Submit Comment</button>
+                    <span class="comments-saved" id="comments-saved-4" style="display:none;">✓ Comment Saved</span>
+                </div>
+
+                <div class="edit-controls">
+                    <button class="btn btn-edit" onclick="editEmail(4)">✏️ Edit Email</button>
+                    <button class="btn btn-save" onclick="saveEmail(4)" style="display:none;">💾 Save Changes</button>
+                    <button class="btn btn-undo" onclick="undoEmail(4)" style="display:none;">↩️ Restore Original</button>
+                    <button class="btn btn-cancel" onclick="cancelEdit(4)" style="display:none;">✖️ Cancel</button>
+                    <button class="btn-approve-email" id="approve-email-4" onclick="approveEmail(4)">✓ Approve</button>
+                    <button class="btn-deny-email" id="deny-email-4" onclick="denyEmail(4)">✗ Deny</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- EMAIL 5 -->
+        <div class="email-card" id="email-5">
+            <div class="email-header">
+                <div class="email-number">EMAIL 5 - Final Email</div>
+                <div class="email-timing">Day 14-21</div>
+            </div>
+            <div class="email-content">
+                <div class="subject-section">
+                    <div class="section-header">
+                        <span class="subject-label">Subject Line</span>
+                        <span class="edit-label">← Edit Subject</span>
+                    </div>
+                    <div class="subject-display" id="subject-5-display">Your restaurant expenses are your business (not mine)</div>
+                    <input type="text" class="subject-input" id="subject-5-input" style="display:none;" value="Your restaurant expenses are your business (not mine)">
+                </div>
+                
+                <div class="body-section">
+                    <div class="section-header">
+                        <span class="body-label">Email Body</span>
+                        <span class="edit-label">← Edit Body Copy</span>
+                    </div>
+                    <div class="email-body-display" id="body-5-display">[First Name],
+
+Last email, then I'll leave you alone.
+
+Our Bank Statement Mortgage: We count deposits. Ignore withdrawals. Period.
+
+No explaining:
+- Food & beverage costs
+- Payroll expenses
+- Personal expenses of any kind
+
+Not my business. Never will be.
+
+Still interested in seeing what you qualify for without the privacy invasion?
+
+Reply with:
+- Your phone number (I'll call today)
+- "YES" (let's talk)
+- "NO" (I'll delete you)
+
+The operating expenses that disqualify you at traditional banks? They're irrelevant in my underwriting process.
+
+That's the fundamental difference.</div>
+                    <textarea class="email-body-textarea" id="body-5-input" style="display:none;">[First Name],
+
+Last email, then I'll leave you alone.
+
+Our Bank Statement Mortgage: We count deposits. Ignore withdrawals. Period.
+
+No explaining:
+- Food & beverage costs
+- Payroll expenses
+- Personal expenses of any kind
+
+Not my business. Never will be.
+
+Still interested in seeing what you qualify for without the privacy invasion?
+
+Reply with:
+- Your phone number (I'll call today)
+- "YES" (let's talk)
+- "NO" (I'll delete you)
+
+The operating expenses that disqualify you at traditional banks? They're irrelevant in my underwriting process.
+
+That's the fundamental difference.</textarea>
+                </div>
+                
+                <div class="signature">Michael</div>
+
+                <div class="comments-section">
+                    <div class="comments-label">💬 Comments & Feedback</div>
+                    <textarea class="comments-textarea" id="comments-5-input" placeholder="Add your comments, suggestions, or feedback here..."></textarea>
+                    <button class="btn-submit-comment" onclick="submitComment(5)">💾 Submit Comment</button>
+                    <span class="comments-saved" id="comments-saved-5" style="display:none;">✓ Comment Saved</span>
+                </div>
+
+                <div class="edit-controls">
+                    <button class="btn btn-edit" onclick="editEmail(5)">✏️ Edit Email</button>
+                    <button class="btn btn-save" onclick="saveEmail(5)" style="display:none;">💾 Save Changes</button>
+                    <button class="btn btn-undo" onclick="undoEmail(5)" style="display:none;">↩️ Restore Original</button>
+                    <button class="btn btn-cancel" onclick="cancelEdit(5)" style="display:none;">✖️ Cancel</button>
+                    <button class="btn-approve-email" id="approve-email-5" onclick="approveEmail(5)">✓ Approve</button>
+                    <button class="btn-deny-email" id="deny-email-5" onclick="denyEmail(5)">✗ Deny</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="approval-section">
+            <h3>Campaign Decision</h3>
+            <p class="approval-section-subtitle">Review and approve or deny this email campaign</p>
+            <div id="decision-status"></div>
+            <div class="approval-buttons">
+                <button class="btn-approve" onclick="approveCampaign()">✓ Approve Campaign</button>
+                <button class="btn-deny" onclick="denyCampaign()">✗ Deny Campaign</button>
+                <button class="btn-unapprove" onclick="unapprovedCampaign()">↺ Unapprove Campaign</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Authentication check
+        if (sessionStorage.getItem('campaignAccess') !== 'granted') {
+            window.location.href = 'client-login.html';
         }
 
-        .footer {
-                            margin-top: 50px;
-                            padding-top: 20px;
-                            border-top: 2px solid #e2e8f0;
-                            text-align: center;
-                            color: #718096;
-                            font-size: 0.9em;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div class="pdf-header">
-                        <div class="pdf-title">${content.title}</div>
-                        <div class="pdf-subtitle">${content.subtitle}</div>
-                    </div>
-                    
-                    ${content.emails.map((email, index) => `
-                        <div class="email-section ${index > 0 ? 'page-break' : ''}">
-                            <div class="email-header">
-                                <div class="email-number">${email.title}</div>
-                                <div class="email-timing">${email.timing}</div>
-                            </div>
-                            
-                            <div class="field-label">Subject Line</div>
-                            <div class="subject-text">${escapeHtml(email.subject)}</div>
-                            
-                            <div class="field-label">Email Body</div>
-                            <div class="body-text">${escapeHtml(email.body)}</div>
-                            
-                            ${email.comments ? `
-                                <div class="field-label">Comments & Feedback</div>
-                                <div class="comments-text">${escapeHtml(email.comments)}</div>
-                            ` : `
-                                <div class="field-label">Comments & Feedback</div>
-                                <div class="comments-empty">No comments provided</div>
-                            `}
-                        </div>
-                    `).join('')}
-                    
-                    <div class="footer">
-                        <p>Generated on ${new Date().toLocaleDateString('en-US', { 
-                            year: 'numeric', 
-                            month: 'long', 
-                            day: 'numeric' 
-                        })}</p>
-                        <p>Campaign Review System</p>
-                    </div>
-                </body>
-                </html>
-            `;
+        const campaignName = 'restaurant';
+        const originalContent = {};
+        const savedContent = {};
+
+        // Initialize
+        // Copy Emails to Clipboard
+        async function copyEmailsToClipboard() {
+            const campaignTitle = document.querySelector('.header h1').textContent;
+            const campaignSubtitle = document.querySelector('.header p').textContent;
             
-            printWindow.document.write(html);
-            printWindow.document.close();
+            let emailsText = `${campaignTitle}\n${campaignSubtitle}\n`;
+            emailsText += '='.repeat(80) + '\n\n';
             
-            // Wait for content to load, then trigger print
-            printWindow.onload = function() {
-                setTimeout(() => {
-                    printWindow.print();
-                    // Close window after printing (user can cancel)
-                    printWindow.onafterprint = function() {
-                        printWindow.close();
+            for (let i = 1; i <= 5; i++) {
+                const subjectDisplay = document.getElementById(`subject-${i}-display`);
+                const bodyDisplay = document.getElementById(`body-${i}-display`);
+                const emailCard = subjectDisplay ? subjectDisplay.closest('.email-card') : null;
+                
+                if (emailCard && subjectDisplay && bodyDisplay) {
+                    const emailTitle = emailCard.querySelector('h2').textContent;
+                    const timing = emailCard.querySelector('.email-card > p').textContent;
+                    
+                    emailsText += `${emailTitle}\n`;
+                    emailsText += `${timing}\n`;
+                    emailsText += '-'.repeat(80) + '\n\n';
+                    emailsText += `SUBJECT: ${subjectDisplay.textContent}\n\n`;
+                    emailsText += `${bodyDisplay.textContent}\n\n`;
+                    emailsText += '='.repeat(80) + '\n\n';
+                }
+            }
+            
+            try {
+                await navigator.clipboard.writeText(emailsText);
+                showCopyFeedback(true);
+            } catch (err) {
+                const textarea = document.createElement('textarea');
+                textarea.value = emailsText;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                
+                try {
+                    document.execCommand('copy');
+                    showCopyFeedback(true);
+                } catch (err2) {
+                    showCopyFeedback(false);
+                }
+                
+                document.body.removeChild(textarea);
+            }
+        }
+        
+        function showCopyFeedback(success) {
+            const btn = document.querySelector('.btn-copy-emails');
+            if (!btn) return;
+            
+            const originalHTML = btn.innerHTML;
+            
+            if (success) {
+                btn.classList.add('copied');
+                btn.innerHTML = '<span>✓</span><span>Copied!</span>';
+                alert('✓ Email sequence copied to clipboard!');
+            } else {
+                alert('⚠️ Failed to copy to clipboard');
+            }
+            
+            setTimeout(() => {
+                btn.classList.remove('copied');
+                btn.innerHTML = originalHTML;
+            }, 2000);
+        }
+        
+        // Export to PDF
+        function exportToPDF() {
+            alert('PDF export feature - Use browser Print function (Ctrl+P / Cmd+P) and select "Save as PDF"');
+        }
+        
+        function init() {
+            // Store original content for all emails
+            for (let i = 1; i <= 5; i++) {
+                const subjectInput = document.getElementById(`subject-${i}-input`);
+                const bodyInput = document.getElementById(`body-${i}-input`);
+                const commentsInput = document.getElementById(`comments-${i}-input`);
+                
+                if (subjectInput && bodyInput) {
+                    originalContent[i] = {
+                        subject: subjectInput.value,
+                        body: bodyInput.value,
+                        comments: commentsInput ? commentsInput.value : ''
                     };
-                }, 250);
+                }
+            }
+            
+            loadSavedContent();
+            loadDecision();
+            loadEmailDecisions();
+        }
+
+        function editEmail(num) {
+            const card = document.getElementById(`email-${num}`);
+            const subjectDisplay = document.getElementById(`subject-${num}-display`);
+            const subjectInput = document.getElementById(`subject-${num}-input`);
+            const bodyDisplay = document.getElementById(`body-${num}-display`);
+            const bodyInput = document.getElementById(`body-${num}-input`);
+            
+            // Toggle displays (comments are always visible now)
+            subjectDisplay.style.display = 'none';
+            subjectInput.style.display = 'block';
+            bodyDisplay.style.display = 'none';
+            bodyInput.style.display = 'block';
+            
+            // Toggle buttons
+            const controls = card.querySelector('.edit-controls');
+            controls.children[0].style.display = 'none'; // Edit
+            controls.children[1].style.display = 'inline-flex'; // Save
+            controls.children[2].style.display = 'inline-flex'; // Undo
+            controls.children[3].style.display = 'inline-flex'; // Cancel
+            
+            card.classList.add('edit-mode');
+        }
+
+        function saveEmail(num) {
+            const subjectInput = document.getElementById(`subject-${num}-input`);
+            const bodyInput = document.getElementById(`body-${num}-input`);
+            const subjectDisplay = document.getElementById(`subject-${num}-display`);
+            const bodyDisplay = document.getElementById(`body-${num}-display`);
+            
+            // Update displays
+            subjectDisplay.textContent = subjectInput.value;
+            bodyDisplay.textContent = bodyInput.value;
+            
+            // Save to storage (get existing comments if any)
+            const commentsInput = document.getElementById(`comments-${num}-input`);
+            if (!savedContent[campaignName]) savedContent[campaignName] = {};
+            savedContent[campaignName][num] = {
+                subject: subjectInput.value,
+                body: bodyInput.value,
+                comments: commentsInput.value || ''
             };
+            localStorage.setItem('campaign-edits', JSON.stringify(savedContent));
+            
+            exitEditMode(num);
+            showSavedIndicator();
         }
         
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
+        function submitComment(num) {
+            const commentsInput = document.getElementById(`comments-${num}-input`);
+            const savedIndicator = document.getElementById(`comments-saved-${num}`);
+            
+            // Save comment to storage
+            if (!savedContent[campaignName]) savedContent[campaignName] = {};
+            if (!savedContent[campaignName][num]) {
+                savedContent[campaignName][num] = {
+                    subject: document.getElementById(`subject-${num}-input`).value,
+                    body: document.getElementById(`body-${num}-input`).value,
+                    comments: commentsInput.value
+                };
+            } else {
+                savedContent[campaignName][num].comments = commentsInput.value;
+            }
+            localStorage.setItem('campaign-edits', JSON.stringify(savedContent));
+            
+            // Show saved indicator
+            savedIndicator.style.display = 'inline-block';
+            setTimeout(() => {
+                savedIndicator.style.display = 'none';
+            }, 3000);
         }
+
+        function undoEmail(num) {
+            if (confirm('This will restore the email to its original version. Continue?')) {
+                const original = originalContent[num];
+                if (original) {
+                    const subjectInput = document.getElementById(`subject-${num}-input`);
+                    const bodyInput = document.getElementById(`body-${num}-input`);
+                    const commentsInput = document.getElementById(`comments-${num}-input`);
+                    const subjectDisplay = document.getElementById(`subject-${num}-display`);
+                    const bodyDisplay = document.getElementById(`body-${num}-display`);
+                    const commentsDisplay = document.getElementById(`comments-${num}-display`);
+                    
+                    subjectInput.value = original.subject;
+                    bodyInput.value = original.body;
+                    commentsInput.value = '';
+                    subjectDisplay.textContent = original.subject;
+                    bodyDisplay.textContent = original.body;
+                    
+                    // Remove from saved
+                    if (savedContent[campaignName] && savedContent[campaignName][num]) {
+                        delete savedContent[campaignName][num];
+                        localStorage.setItem('campaign-edits', JSON.stringify(savedContent));
+                    }
+                    
+                    exitEditMode(num);
+                    alert('✓ Email restored to original version!');
+                }
+            }
+        }
+
+        function cancelEdit(num) {
+            const saved = savedContent[campaignName]?.[num] || originalContent[num];
+            if (saved) {
+                const subjectInput = document.getElementById(`subject-${num}-input`);
+                const bodyInput = document.getElementById(`body-${num}-input`);
+                const commentsInput = document.getElementById(`comments-${num}-input`);
+                
+                subjectInput.value = saved.subject;
+                bodyInput.value = saved.body;
+                commentsInput.value = saved.comments || '';
+            }
+            exitEditMode(num);
+        }
+
+        function exitEditMode(num) {
+            const card = document.getElementById(`email-${num}`);
+            const subjectDisplay = document.getElementById(`subject-${num}-display`);
+            const subjectInput = document.getElementById(`subject-${num}-input`);
+            const bodyDisplay = document.getElementById(`body-${num}-display`);
+            const bodyInput = document.getElementById(`body-${num}-input`);
+            
+            subjectDisplay.style.display = 'block';
+            subjectInput.style.display = 'none';
+            bodyDisplay.style.display = 'block';
+            bodyInput.style.display = 'none';
+            
+            const controls = card.querySelector('.edit-controls');
+            controls.children[0].style.display = 'inline-flex'; // Edit
+            controls.children[1].style.display = 'none'; // Save
+            controls.children[2].style.display = 'none'; // Undo
+            controls.children[3].style.display = 'none'; // Cancel
+            
+            card.classList.remove('edit-mode');
+        }
+
+        function showSavedIndicator() {
+            const indicator = document.createElement('div');
+            indicator.className = 'saved-indicator';
+            indicator.textContent = '✓ Changes Saved Successfully';
+            document.body.appendChild(indicator);
+            
+            setTimeout(() => {
+                indicator.remove();
+            }, 3000);
+        }
+
+        function loadSavedContent() {
+            const saved = localStorage.getItem('campaign-edits');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                Object.assign(savedContent, parsed);
+                
+                if (parsed[campaignName]) {
+                    Object.keys(parsed[campaignName]).forEach(num => {
+                        const content = parsed[campaignName][num];
+                        const subjectDisplay = document.getElementById(`subject-${num}-display`);
+                        const subjectInput = document.getElementById(`subject-${num}-input`);
+                        const bodyDisplay = document.getElementById(`body-${num}-display`);
+                        const bodyInput = document.getElementById(`body-${num}-input`);
+                        const commentsDisplay = document.getElementById(`comments-${num}-display`);
+                        const commentsInput = document.getElementById(`comments-${num}-input`);
+                        
+                        if (subjectDisplay && bodyDisplay) {
+                            subjectDisplay.textContent = content.subject;
+                            subjectInput.value = content.subject;
+                            bodyDisplay.textContent = content.body;
+                            bodyInput.value = content.body;
+                            
+                            if (content.comments && content.comments.trim()) {
+                                commentsInput.value = content.comments;
+                            }
+                        }
+                    });
+                }
+            }
+        }
+
+        function approveCampaign() {
+            if (confirm('Are you sure you want to APPROVE the Restaurant campaign?')) {
+                localStorage.setItem(`campaign-${campaignName}`, 'approved');
+                loadDecision();
+                alert('✓ Restaurant campaign has been APPROVED!');
+            }
+        }
+
+        function denyCampaign() {
+            if (confirm('Are you sure you want to DENY the Restaurant campaign?')) {
+                localStorage.setItem(`campaign-${campaignName}`, 'denied');
+                loadDecision();
+                alert('✗ Restaurant campaign has been DENIED.');
+            }
+        }
+
+        function loadDecision() {
+            const decision = localStorage.getItem(`campaign-${campaignName}`);
+            const statusDiv = document.getElementById('decision-status');
+            
+            if (decision === 'approved') {
+                statusDiv.innerHTML = '<div class="status-badge status-approved">✓ Campaign Approved</div>';
+            } else if (decision === 'denied') {
+                statusDiv.innerHTML = '<div class="status-badge status-denied">✗ Campaign Denied</div>';
+            }
+        }
+
+        function unapprovedCampaign() {
+            if (confirm('Are you sure you want to UNAPPROVE the Restaurant campaign? This will reset it to pending status.')) {
+                localStorage.removeItem(`campaign-${campaignName}`);
+                const statusDiv = document.getElementById('decision-status');
+                statusDiv.innerHTML = ''; // Clear the status badge
+                alert('↺ Restaurant campaign has been reset to PENDING status.');
+            }
+        }
+        
+        function approveEmail(num) {
+            const approveBtn = document.getElementById(`approve-email-${num}`);
+            const denyBtn = document.getElementById(`deny-email-${num}`);
+            
+            // Toggle approved state
+            if (approveBtn.classList.contains('approved')) {
+                // Unapprove
+                approveBtn.classList.remove('approved');
+                localStorage.removeItem(`email-${campaignName}-${num}`);
+            } else {
+                // Approve
+                approveBtn.classList.add('approved');
+                denyBtn.classList.remove('denied');
+                localStorage.setItem(`email-${campaignName}-${num}`, 'approved');
+                
+                // Update SmartLead when email is approved
+                updateSmartLeadCampaign(num);
+            }
+        }
+        
+        function denyEmail(num) {
+            const approveBtn = document.getElementById(`approve-email-${num}`);
+            const denyBtn = document.getElementById(`deny-email-${num}`);
+            
+            // Toggle denied state
+            if (denyBtn.classList.contains('denied')) {
+                // Undeny
+                denyBtn.classList.remove('denied');
+                localStorage.removeItem(`email-${campaignName}-${num}`);
+            } else {
+                // Deny
+                denyBtn.classList.add('denied');
+                approveBtn.classList.remove('approved');
+                localStorage.setItem(`email-${campaignName}-${num}`, 'denied');
+            }
+        }
+        
+        function loadEmailDecisions() {
+            // Load individual email approval/denial states
+            for (let i = 1; i <= 5; i++) {
+                const decision = localStorage.getItem(`email-${campaignName}-${i}`);
+                const approveBtn = document.getElementById(`approve-email-${i}`);
+                const denyBtn = document.getElementById(`deny-email-${i}`);
+                
+                if (decision === 'approved' && approveBtn) {
+                    approveBtn.classList.add('approved');
+                } else if (decision === 'denied' && denyBtn) {
+                    denyBtn.classList.add('denied');
+                }
+            }
+        }
+        
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                sessionStorage.removeItem('campaignAccess');
+                window.location.href = 'client-login.html';
+            }
+        }
+
 
         // SmartLead Integration
         const SMARTLEAD_CAMPAIGN_ID = null; // Set this to your SmartLead campaign ID
