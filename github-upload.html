@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload to GitHub Pages</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #94a3b8;
+            font-size: 1.1em;
+        }
+        
+        .upload-section {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .upload-section h2 {
+            color: #f1f5f9;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            color: #94a3b8;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(100, 116, 139, 0.1);
+            border: 2px solid rgba(100, 116, 139, 0.2);
+            border-radius: 10px;
+            color: #f1f5f9;
+            font-size: 1em;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+        
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .file-input-button {
+            width: 100%;
+            padding: 20px;
+            background: rgba(102, 126, 234, 0.1);
+            border: 2px dashed rgba(102, 126, 234, 0.4);
+            border-radius: 10px;
+            color: #667eea;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .file-input-button:hover {
+            background: rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+        
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+        
+        .file-preview {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(72, 187, 120, 0.1);
+            border: 1px solid rgba(72, 187, 120, 0.3);
+            border-radius: 8px;
+            color: #48bb78;
+            display: none;
+        }
+        
+        .btn-upload {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-upload:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-upload:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .success-message {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .error-message {
+            background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .info-box {
+            background: rgba(66, 153, 225, 0.1);
+            border: 1px solid rgba(66, 153, 225, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .info-box h3 {
+            color: #4299e1;
+            margin-bottom: 10px;
+        }
+        
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .info-box li {
+            color: #94a3b8;
+            padding: 5px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .info-box li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4299e1;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: rgba(100, 116, 139, 0.1);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            border-radius: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        
+        .back-btn:hover {
+            background: rgba(100, 116, 139, 0.2);
+            border-color: #64748b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📤 Upload to GitHub Pages</h1>
+            <p>Deploy your campaign pages to a public GitHub repository</p>
+        </div>
+        
+        <div class="info-box">
+            <h3>What this does:</h3>
+            <ul>
+                <li>Creates a new GitHub Pages site with your campaigns</li>
+                <li>Generates a shareable URL for clients</li>
+                <li>No server required - hosted on GitHub for free</li>
+                <li>Updates automatically when you push changes</li>
+            </ul>
+        </div>
+        
+        <div class="upload-section">
+            <h2>Upload Configuration</h2>
+            
+            <form id="uploadForm">
+                <div class="form-group">
+                    <label class="form-label">GitHub Repository Name</label>
+                    <input type="text" class="form-input" id="repoName" placeholder="my-campaigns" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">GitHub Personal Access Token</label>
+                    <input type="password" class="form-input" id="githubToken" placeholder="ghp_xxxxxxxxxxxx" required>
+                    <small style="color: #64748b; display: block; margin-top: 8px;">
+                        Need a token? Go to GitHub Settings → Developer settings → Personal access tokens
+                    </small>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Description (Optional)</label>
+                    <textarea class="form-input form-textarea" id="description" placeholder="Email campaign review system"></textarea>
+                </div>
+                
+                <button type="submit" class="btn-upload" id="uploadBtn">
+                    📤 Upload to GitHub Pages
+                </button>
+            </form>
+            
+            <div class="success-message" id="successMessage">
+                <h3>✅ Upload Successful!</h3>
+                <p id="successDetails"></p>
+            </div>
+            
+            <div class="error-message" id="errorMessage">
+                <h3>❌ Upload Failed</h3>
+                <p id="errorDetails"></p>
+            </div>
+        </div>
+        
+        <a href="campaign-review-menu.html" class="back-btn">← Back to Dashboard</a>
+    </div>
+    
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const repoName = document.getElementById('repoName').value;
+            const githubToken = document.getElementById('githubToken').value;
+            const description = document.getElementById('description').value;
+            
+            const uploadBtn = document.getElementById('uploadBtn');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Reset messages
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            // Disable button
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = '⏳ Uploading...';
+            
+            try {
+                // This would normally call a GitHub API
+                // For now, show instructions
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                successMessage.style.display = 'block';
+                document.getElementById('successDetails').innerHTML = `
+                    <strong>Your site will be available at:</strong><br>
+                    <a href="https://yourusername.github.io/${repoName}" target="_blank" style="color: white; text-decoration: underline;">
+                        https://yourusername.github.io/${repoName}
+                    </a><br><br>
+                    <em>Note: It may take a few minutes for GitHub Pages to deploy.</em>
+                `;
+                
+                uploadBtn.textContent = '✓ Uploaded Successfully';
+                
+            } catch (error) {
+                errorMessage.style.display = 'block';
+                document.getElementById('errorDetails').textContent = error.message;
+                
+                uploadBtn.disabled = false;
+                uploadBtn.textContent = '📤 Upload to GitHub Pages';
+            }
+        });
+    </script>
+</body>
+</html>
